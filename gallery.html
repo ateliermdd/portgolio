@@ -13,7 +13,6 @@
             position: relative;
             z-index: 1;
             display: block; /* Évite les décalages de ligne */
-            will-change: transform;
             transform-origin: center center;
         }
 
@@ -27,7 +26,7 @@
 
         /* État agrandi (Toggle par clic/tap) - Version Mobile par défaut */
         .gallery-masonry img.is-expanded {
-            transform: scale(7.5) !important; /* Taille de base conservée pour le mobile */
+            transform: scale(4) !important; /* Taille de base conservée pour le mobile */
             z-index: 100 !important;
             outline: 1000vw solid rgba(255, 255, 255, 0); /* Aide à la détection de zone */
         }
@@ -35,7 +34,7 @@
         /* État agrandi spécifique Desktop (30% plus grand) */
         @media (min-width: 1001px) {
             .gallery-masonry img.is-expanded {
-                transform: scale(11.2) !important; /* Taille augmentée pour les grands écrans */
+                transform: scale(6) !important; /* Taille augmentée pour les grands écrans */
             }
         }
 
