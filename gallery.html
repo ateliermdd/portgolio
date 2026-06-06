@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maïssane - Gallery</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <style>
+
+               .gallery-masonry img {
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
+            display: block; /* Évite les décalages de ligne */
+            will-change: transform;
+            transform-origin: center center;
+        }
+
+        /* Effet au survol (Desktop uniquement) */
+        @media (hover: hover) and (min-width: 1001px) {
+            .gallery-masonry img:hover {
+                transform: scale(11.2); /* Augmenté de 30% pour le desktop (7 * 1.3) */
+                z-index: 10;
+            }
+        }
+
+        /* État agrandi (Toggle par clic/tap) - Version Mobile par défaut */
+        .gallery-masonry img.is-expanded {
+            transform: scale(7.5) !important; /* Taille de base conservée pour le mobile */
+            z-index: 100 !important;
+            outline: 1000vw solid rgba(255, 255, 255, 0); /* Aide à la détection de zone */
+        }
+
+        /* État agrandi spécifique Desktop (30% plus grand) */
+        @media (min-width: 1001px) {
+            .gallery-masonry img.is-expanded {
+                transform: scale(11.2) !important; /* Taille augmentée pour les grands écrans */
+            }
+        }
+
+        
+        /* Désactiver le curseur sur mobile/tablette */
+        @media (max-width: 1024px) {
+            .cursor-follower {
+                display: none !important;
+            }
+        }
+
+    </style>
+</head>
+<body class="is-gallery">
+    <div class="cursor-follower"></div>
+
+    <header class="site-header">
+        <nav>
+            <div class="nav-left">
+                <a href="gallery.html" class="nav-item">GALLERY</a>
+                <div class="expertise-list">
+                    <span>ARTISTIC DIRECTION</span>
+                    <span>ILLUSTRATION</span>
+                    <span>GRAPHIC DESIGN</span>
+                    <span>BRANDING</span>
+                    <span>TYPOGRAPHY</span>
+                    <span>SCENOGRAPHY</span>
+                    <span>MOTION DESIGN</span>
+                    <span>PACKAGING</span>
+                    <span>POSTER</span>
+                    <span>EDITORIAL</span>
+                    <span>ARTIFICIAL INTELLIGENCE</span>
+                    <span>PHOTO EDITING</span>
+                    <span>FILM DIRECTOR</span>
+                    <span>WEBSITE</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-item" id="contact-btn">CONTACT</a>
+                <a href="info.html" class="nav-item">INFO</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="projets/logo/anim_logovf.gif" alt="Maïssane Animated Logo" class="animated-main-logo">
+            </a>
+        </div>
+
+        <section class="gallery-section">
+            <div class="gallery-masonry">
+                <!-- 18 images réparties sur 8 colonnes -->
+                <img src="projets/gallery/17.jpg" alt="Gallery image 17">
+                <img src="projets/gallery/01.jpg" alt="Gallery image 1">
+                <img src="projets/gallery/02.jpg" alt="Gallery image 2">
+                <img src="projets/gallery/03.jpg" alt="Gallery image 3">
+                <img src="projets/gallery/04.jpg" alt="Gallery image 4">
+                <img src="projets/gallery/05.jpg" alt="Gallery image 5">
+                <img src="projets/gallery/06.jpg" alt="Gallery image 6">
+                <img src="projets/gallery/07.jpg" alt="Gallery image 7">
+                <img src="projets/gallery/08.jpg" alt="Gallery image 8">
+                <img src="projets/gallery/09.jpg" alt="Gallery image 9">
+                <img src="projets/gallery/18.jpg" alt="Gallery image 18">
+                <img src="projets/gallery/10.jpg" alt="Gallery image 10">
+                <img src="projets/gallery/11.jpg" alt="Gallery image 11">
+                <img src="projets/gallery/12.jpg" alt="Gallery image 12">
+                <img src="projets/gallery/13.jpg" alt="Gallery image 13">
+                <img src="projets/gallery/14.jpg" alt="Gallery image 14">
+                <img src="projets/gallery/15.jpg" alt="Gallery image 15">
+                <img src="projets/gallery/16.jpg" alt="Gallery image 16">
+                <img src="projets/gallery/19.jpg" alt="Gallery image 19">
+                <img src="projets/gallery/20.jpg" alt="Gallery image 20">
+                <img src="projets/gallery/21.jpg" alt="Gallery image 21">
+                <img src="projets/gallery/22.jpg" alt="Gallery image 22">
+                <img src="projets/gallery/23.jpg" alt="Gallery image 23">
+                <img src="projets/gallery/24.jpg" alt="Gallery image 24">
+                <img src="projets/gallery/25.jpg" alt="Gallery image 25">
+                <img src="projets/gallery/26.jpg" alt="Gallery image 26">
+                <img src="projets/gallery/27.jpg" alt="Gallery image 27">
+                <img src="projets/gallery/28.jpg" alt="Gallery image 28">
+                <img src="projets/gallery/29.jpg" alt="Gallery image 29">
+                <img src="projets/gallery/30.jpg" alt="Gallery image 30">
+                <img src="projets/gallery/31.jpg" alt="Gallery image 31">
+                <img src="projets/gallery/32.jpg" alt="Gallery image 32">
+
+
+            </div>
+            <footer class="site-footer">Copyright © 2026 Atelier MDD</footer>
+        </section>
+    </main>
+
+    <div id="contact-overlay">
+        <div class="overlay-content">
+            <div class="contact-details">
+                <span class="contact-item">Let's work together</span>
+                <a href="mailto:maissane.dia@gmail.com" class="contact-item contact-email">maissane.dia@gmail.com</a>
+                <a href="tel:+33618434195" class="contact-item contact-phone">+33 6 18 43 41 95</a>
+                <a href="https://www.linkedin.com/in/maïssane-dia-deverre-a1b712229/" target="_blank" class="contact-item contact-linkedin">LinkedIn</a>
+                <a href="https://www.instagram.com/maissane.ddv/" target="_blank" class="contact-item contact-instagram">Instagram</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Système d'agrandissement au clic/tap
+            const galleryImages = document.querySelectorAll('.gallery-masonry img');
+            
+            galleryImages.forEach(img => {
+                img.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isExpanded = img.classList.contains('is-expanded');
+                    
+                    // On ferme tout
+                    galleryImages.forEach(i => i.classList.remove('is-expanded'));
+                    
+                    // Si elle n'était pas ouverte, on l'ouvre
+                    if (!isExpanded) {
+                        img.classList.add('is-expanded');
+                    }
+                });
+            });
+
+            // Fermer si on clique à côté
+            document.addEventListener('click', () => {
+                galleryImages.forEach(i => i.classList.remove('is-expanded'));
+            });
+        });
+    </script>
+</body>
+</html>

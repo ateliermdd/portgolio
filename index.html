@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maïssane - Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <style>
+        /* --- CORRECTIONS BUGS (OVERLAY PROJET) --- */
+
+        /* Masquer l'expertise-list quand le projet est ouvert */
+        body.project-open .expertise-list {
+            display: none !important;
+        }
+
+        /* Masquer les images home (strip) via opacity quand un projet est ouvert */
+        body.project-open .project-strip {
+            opacity: 0;
+            pointer-events: none; /* Désactive les clics sur les éléments invisibles */
+            transition: opacity 0.6s ease;
+        }
+
+        /* Animation Logo & Subtext */
+        /* Les styles pour .subtext ne sont plus nécessaires car il est remplacé par le logo animé */
+        /* .subtext {
+            transition: opacity 0.3s ease, visibility 0.3s;
+        } */
+
+        /* BUG 3: Bloc Texte */
+        .project-text-layer {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 5vw;
+            z-index: 950; /* Au-dessus des images (910) */
+            background: transparent !important;
+            pointer-events: none; /* Permet de cliquer à travers les zones vides */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 6px;
+        }
+
+        /* Typographie Unifiée (Titre, Desc, Close) */
+        .project-title,
+        .project-description,
+        .project-close-btn {
+            font-family: 'TexGyreHerosCn', sans-serif !important;
+            line-height: 1.1;
+            max-width: 220px;
+            font-size: clamp(8px, 1.1vw, var(--text-size));
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: black; /* Couleur de base pour que 'difference' fonctionne */
+            margin: 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            text-align: left;
+            pointer-events: auto; /* Réactive les clics sur le texte */
+        }
+
+        .project-close-btn {
+            margin-top: 0;
+        }
+
+        /* BUG 4: Scroll Images (Desktop) */
+        .project-gallery-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 910; /* Sous le texte */
+            pointer-events: auto;
+            display: flex;
+            flex-wrap: nowrap; /* Force la ligne */
+            align-items: center;
+            overflow-x: auto; /* Scroll horizontal natif */
+            overflow-y: hidden;
+            padding-left: 350px; /* Espace pour le texte à gauche */
+            padding-right: 100px;
+            box-sizing: border-box;
+            /* Masquer scrollbar pour esthétique */
+            scrollbar-width: none; 
+            -ms-overflow-style: none;
+            gap: 8px; /* Espacement réduit entre les images */
+        }
+        .project-gallery-layer::-webkit-scrollbar {
+            display: none;
+        }
+
+        .project-gallery-img {
+            height: 65vh; /* Hauteur fixe, largeur auto */
+            width: auto;
+            flex-shrink: 0; /* Ne pas écraser les images */
+            margin-right: 0;
+            object-fit: cover;
+        }
+
+        /* Bloquer le scroll du site principal */
+        body.project-open {
+            overflow: hidden;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .project-gallery-layer {
+                flex-direction: column;
+                overflow-x: hidden;
+                overflow-y: auto; /* Scroll vertical */
+                padding: 150px 20px 50px 20px;
+                align-items: center;
+                gap: 10px; /* Espacement réduit sur mobile */
+            }
+
+            .project-gallery-img {
+                width: 100%;
+                height: auto;
+                margin-right: 0;
+                margin-bottom: 0;
+            }
+        }
+
+        /* Masquer le contenu (Home & Projet) quand Contact est ouvert */
+        body.overlay-open .project-strip,
+        body.overlay-open #project-overlay {
+            opacity: 0 !important;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        /* --- EFFECT 01 : STRIP & ITEMS --- */
+        .project-strip {
+            height: 250px !important; 
+            gap: 0 !important;
+            align-items: flex-end !important;
+            padding-bottom: 0 !important;
+        }
+
+        .project-item {
+            position: relative;
+            height: 180px !important; /* Hauteur de base augmentée */
+            width: auto !important;
+            flex: 0 0 auto !important; /* Base fixe */
+            aspect-ratio: 1 / 2 !important; /* Ratio vertical : la largeur reste identique (200px) */
+            transform: none !important; /* Suppression scale */
+            transition: height 0.45s cubic-bezier(.22,.61,.36,1) !important;
+            overflow: hidden !important;
+            z-index: 1 !important;
+        }
+
+        .project-item:hover {
+            height: 250px !important; /* Expansion verticale maximale au hover */
+            z-index: 10 !important;
+            flex-grow: 0 !important;
+            /* La largeur s'adaptera automatiquement via l'aspect-ratio */
+        }
+
+        /* --- ANIMATION SCROLL INFINI --- */
+        .project-strip {
+            gap: 0 !important; /* L'espacement est géré dans le track */
+            padding-right: 0 !important;
+        }
+
+        .project-track {
+            display: flex;
+            gap: 10px; /* Gap réduit */
+            padding-right: 20px;
+            height: 100%;
+            align-items: flex-end;
+            flex-shrink: 0;
+            will-change: transform;
+        }
+
+        /* Suppression du pause hover pour le scroll JS plus fluide */
+        /* .project-strip:hover .project-track {
+            animation-play-state: paused;
+        } */
+
+        /* --- VIDEO PLAYER OVERLAY --- */
+        #video-overlay {
+            display: none; /* Caché par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            z-index: 5000; /* Au-dessus de tout */
+            align-items: center;
+            justify-content: center;
+        }
+
+        #video-overlay.active {
+            display: flex;
+        }
+
+        #fullscreen-video {
+            max-width: 100%;
+            max-height: 100vh;
+            width: auto;
+            height: auto;
+            outline: none;
+        }
+
+        #video-close-btn {
+            position: fixed;
+            top: 35px; /* Ajusté pour s'aligner avec la nav */
+            right: 40px; /* Ajusté pour s'aligner avec Contact */
+            z-index: 5001;
+            color: white;
+            mix-blend-mode: difference;
+            cursor: pointer;
+            font-family: 'TexGyreHerosCn', sans-serif;
+            font-size: clamp(8px, 1.1vw, var(--text-size));
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            background: transparent;
+            border: none;
+        }
+
+        /* Style du badge PLAY sur le curseur */
+        .cursor-follower.play-mode {
+            background: black !important;
+            color: white !important;
+            padding: 4px 12px !important;
+            border-radius: 0 !important;
+            font-family: 'TexGyreHerosCn', sans-serif !important;
+            font-size: clamp(8px, 1.1vw, var(--text-size)) !important;
+            font-weight: 500 !important;
+            letter-spacing: 0.2em !important;
+            height: auto !important;
+            width: auto !important;
+            white-space: nowrap;
+            mix-blend-mode: normal !important;
+        }
+
+        /* --- EFFET MINIATURES HOME (N&B / OPACITÉ) --- */
+        .project-item img,
+        .project-item video {
+            transition: filter 0.4s ease, opacity 0.4s ease;
+            /* S'assure que l'image occupe tout l'espace pour l'effet */
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Désactiver le curseur sur mobile/tablette */
+        @media (max-width: 1024px) {
+            .cursor-follower {
+                display: none !important;
+            }
+        }
+
+    
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <!-- Le GIF animé au centre -->
+        <img src="projets/gif%20logo/mddlogo_v2.gif" alt="Loading..." class="preloader-gif">
+    </div>
+    <!-- Curseur personnalisé -->
+    <div class="cursor-follower"></div>
+
+    <header class="site-header">
+        <nav>
+            <div class="nav-left">
+                <a href="gallery.html" class="nav-item">GALLERY</a>
+                <div class="expertise-list">
+                    <span>ARTISTIC DIRECTION</span>
+                    <span>ILLUSTRATION</span>
+                    <span>GRAPHIC DESIGN</span>
+                    <span>BRANDING</span>
+                    <span>TYPOGRAPHY</span>
+                    <span>SCENOGRAPHY</span>
+                    <span>MOTION DESIGN</span>
+                    <span>PACKAGING</span>
+                    <span>POSTER</span>
+                    <span>EDITORIAL</span>
+                    <span>ARTIFICIAL INTELLIGENCE</span>
+                    <span>PHOTO EDITING</span>
+                    <span>FILM DIRECTOR</span>
+                    <span>WEBSITE</span>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="#" class="nav-item" id="contact-btn">CONTACT</a>
+                <a href="info.html" class="nav-item">INFO</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="projets/logo/anim_logovf.gif" alt="Maïssane Animated Logo" class="animated-main-logo">
+            </a>
+        </div>
+    </main>
+
+    <footer class="project-strip">
+        <div class="project-track">
+            <div class="project-item" data-title="COP1">
+                <img src="projets/cop1/cop1_05.webp" alt="COP1">
+            </div>
+            <div class="project-item" data-title="MÉMOIRE">
+                <img src="projets/strips/memoire.webp" alt="Projet Mémoire">
+            </div>
+            <div class="project-item" data-title="AGENCE DICI">
+                <img src="projets/strips/dici.webp" alt="Agence DICI">
+            </div>
+            <div class="project-item" data-title="THE CULTURE EVOLVES">
+                <img src="projets/strips/culture.gif" alt="THE CULTURE EVOLVES">
+            </div>
+            <div class="project-item" data-title="KEBLACK">
+                <img src="projets/strips/keblack.webp" alt="KEBLACK">
+            </div>
+            <div class="project-item" data-title="SUNBURN">
+                <img src="projets/sunburn/visuel_04.gif" alt="SUNBURN">
+            </div>
+            <div class="project-item" data-title="SINEQUANON">
+                <img src="projets/strips/sinequanon.webp" alt="SINEQUANON">
+            </div>
+            <!-- Projet 1: Creolisationn -->
+           <div class="project-item" data-title="CRÉOLISATION">
+                <img src="projets/strips/pfe.gif" alt="CRÉOLISATION">
+            </div>
+            <!-- Projet 2: THA -->
+            <div class="project-item" data-title="THA">
+                <img src="projets/strips/tha.webp" alt="THA">
+            </div>
+            <!-- Projet 3: Andersson Bell -->
+            <div class="project-item" data-title="ANDERSSON BELL">
+                <img src="projets/strips/bell.webp" alt="ANDERSSON BELL">
+            </div>
+            <!-- Projet: Japon -->
+            <div class="project-item" data-title="JAPON">
+                <img src="projets/strips/japon.webp" alt="JAPON">
+            </div>
+        </div>
+    </footer>
+
+    <div id="contact-overlay">
+        <div class="overlay-content">
+            <div class="contact-details">
+                <span class="contact-item">Let's work together</span>
+                <a href="mailto:maissane.dia@gmail.com" class="contact-item contact-email">maissane.dia@gmail.com</a>
+                <a href="tel:+33618434195" class="contact-item contact-phone">+33 6 18 43 41 95</a>
+                <a href="https://www.linkedin.com/in/maïssane-dia-deverre-a1b712229/" target="_blank" class="contact-item contact-linkedin">LinkedIn</a>
+                <a href="https://www.instagram.com/maissane.ddv/" target="_blank" class="contact-item contact-instagram">Instagram</a>
+            </div>
+            <footer class="site-footer">Copyright © 2026 Atelier MDD</footer>
+        </div>
+    </div>
+
+    <!-- OVERLAY PROJET (Template SPA) -->
+    <section id="project-overlay">
+        <!-- Zone Texte Fixe -->
+        <div class="project-text-layer">
+            <h1 class="project-title"></h1>
+            <div class="project-description"></div>
+            <button class="project-close-btn">CLOSE</button>
+        </div>
+        <!-- Zone Images Scrollable -->
+        <div class="project-gallery-layer">
+    </div></section>
+
+    <!-- VIDEO PLAYER OVERLAY -->
+    <div id="video-overlay">
+        <button id="video-close-btn">CLOSE</button>
+        <video id="fullscreen-video" controls playsinline preload="metadata"></video>
+    </div>
+
+</body>
+</html>
