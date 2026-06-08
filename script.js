@@ -96,8 +96,31 @@ document.addEventListener('DOMContentLoaded', () => {
         if (contactBtn && contactOverlay) {
             contactBtn.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation(); // Évite que le clic ne soit immédiatement capté par l'overlay
                 const isActive = contactOverlay.classList.toggle('active');
                 document.body.classList.toggle('overlay-open', isActive);
+            });
+
+            // Fermer au clic sur l'overlay (n'importe où : fond, texte, etc.)
+            contactOverlay.addEventListener('click', () => {
+                contactOverlay.classList.remove('active');
+                document.body.classList.remove('overlay-open');
+            });
+
+            // Empêcher la fermeture lors du clic sur les liens (e-mail, tel, réseaux)
+            const contactLinks = contactOverlay.querySelectorAll('a');
+            contactLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            });
+
+            // Fermer avec la touche Échap
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && contactOverlay.classList.contains('active')) {
+                    contactOverlay.classList.remove('active');
+                    document.body.classList.remove('overlay-open');
+                }
             });
         }
 

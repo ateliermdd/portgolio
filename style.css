@@ -624,7 +624,7 @@ body.is-info .cursor-follower {
     width: max-content;
     gap: 15px;
     padding: 0;
-    z-index: 85;
+    z-index: 2001; /* Au-dessus de l'overlay de la galerie (z-index: 2000) */
     pointer-events: none; /* Permet de cliquer à travers la liste */
     background: transparent;
     mix-blend-mode: difference;
@@ -632,7 +632,7 @@ body.is-info .cursor-follower {
     /* Typographie compacte et responsive */
     font-family: 'NimbusRoman', serif;
     font-style: regular;
-    font-size: clamp(8px, 0.5vw, 1px); /* Correction du max-size pour la visibilité */
+    font-size: clamp(8px, 0.5vw, 12px); /* Assure une taille lisible, s'adapte mais ne devient pas trop petit */
     color: #000000; /* Indispensable pour l'effet différence sur fond blanc */
     text-transform: uppercase;
     line-height: 1; /* Assure que le texte ne se chevauche pas */
@@ -1164,6 +1164,7 @@ body.show-more-info div.col-clients.togglable-content {
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: zoom-out;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;

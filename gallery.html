@@ -7,47 +7,53 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <style>
-
-        .gallery-masonry {
-            /* Crée un contexte de perspective pour aider le moteur de rendu 3D */
-            perspective: 1000px;
-        }
-
         .gallery-masonry img {
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), z-index 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-            z-index: 1;
             display: block; /* Évite les décalages de ligne */
-            transform-origin: center center;
-            /* Prépare le lissage sans créer de calque basse résolution prématuré */
-            backface-visibility: hidden;
-            -webkit-font-smoothing: subpixel-antialiased;
-            image-rendering: -webkit-optimize-contrast; /* Améliore la netteté sur Chrome/Safari */
+            cursor: pointer;
+            transition: opacity 0.3s ease;
         }
 
-        /* Effet au survol (Desktop uniquement) */
-        @media (hover: hover) and (min-width: 1001px) {
-            .gallery-masonry img:hover {
-                transform: scale(5) translateZ(0);
-                z-index: 10;
-            }
+        .gallery-masonry img:hover {
+            opacity: 0.8;
         }
 
-        /* État agrandi (Toggle par clic/tap) - Version Mobile par défaut */
-        .gallery-masonry img.is-expanded {
-            /* translateZ(0) force le recalcul de la texture à la nouvelle taille */
-            transform: scale(4) translateZ(0) !important; 
-            z-index: 100 !important;
-            box-shadow: 0 0 50px rgba(0,0,0,0.3); /* Remplace l'outline pour l'emphase */
+        /* NOUVEL OVERLAY GALLERY */
+        #gallery-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.6);
+            z-index: 2000; /* Maintenu à 2000 pour que l'expertise-list (2001) soit au-dessus */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: zoom-out;
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
         }
 
-        /* État agrandi spécifique Desktop (30% plus grand) */
-        @media (min-width: 1001px) {
-            .gallery-masonry img.is-expanded {
-                transform: scale(6) translateZ(0) !important;
-            }
+        #gallery-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
 
+        #gallery-overlay img {
+            max-width: 90%;
+            max-height: 85vh;
+            object-fit: contain;
+            box-shadow: 0 0 40px rgba(211, 211, 211, 0.5);
+            cursor: zoom-out;
+        }
+
+        body.gallery-open {
+            overflow: hidden;
+        }
         
         /* Désactiver le curseur sur mobile/tablette */
         @media (max-width: 1024px) {
@@ -65,22 +71,6 @@
         <nav>
             <div class="nav-left">
                 <a href="gallery.html" class="nav-item">GALLERY</a>
-                <div class="expertise-list">
-                    <span>ARTISTIC DIRECTION</span>
-                    <span>ILLUSTRATION</span>
-                    <span>GRAPHIC DESIGN</span>
-                    <span>BRANDING</span>
-                    <span>TYPOGRAPHY</span>
-                    <span>SCENOGRAPHY</span>
-                    <span>MOTION DESIGN</span>
-                    <span>PACKAGING</span>
-                    <span>POSTER</span>
-                    <span>EDITORIAL</span>
-                    <span>ARTIFICIAL INTELLIGENCE</span>
-                    <span>PHOTO EDITING</span>
-                    <span>FILM DIRECTOR</span>
-                    <span>WEBSITE</span>
-                </div>
             </div>
             <div class="nav-right">
                 <a href="#" class="nav-item" id="contact-btn">CONTACT</a>
@@ -88,6 +78,23 @@
             </div>
         </nav>
     </header>
+
+    <div class="expertise-list">
+        <span>ARTISTIC DIRECTION</span>
+        <span>ILLUSTRATION</span>
+        <span>GRAPHIC DESIGN</span>
+        <span>BRANDING</span>
+        <span>TYPOGRAPHY</span>
+        <span>SCENOGRAPHY</span>
+        <span>MOTION DESIGN</span>
+        <span>PACKAGING</span>
+        <span>POSTER</span>
+        <span>EDITORIAL</span>
+        <span>ARTIFICIAL INTELLIGENCE</span>
+        <span>PHOTO EDITING</span>
+        <span>FILM DIRECTOR</span>
+        <span>WEBSITE</span>
+    </div>
 
     <main class="hero">
         <div class="logo-container">
@@ -138,6 +145,11 @@
         </section>
     </main>
 
+    <!-- NOUVEL OVERLAY POUR L'AGRANDISSEMENT -->
+    <div id="gallery-overlay">
+        <img src="" alt="Expanded view" id="gallery-full-img">
+    </div>
+
     <div id="contact-overlay">
         <div class="overlay-content">
             <div class="contact-details">
@@ -152,27 +164,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Système d'agrandissement au clic/tap
             const galleryImages = document.querySelectorAll('.gallery-masonry img');
+            const overlay = document.getElementById('gallery-overlay');
+            const fullImg = document.getElementById('gallery-full-img');
             
+            // Ouvrir l'overlay
             galleryImages.forEach(img => {
-                img.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const isExpanded = img.classList.contains('is-expanded');
-                    
-                    // On ferme tout
-                    galleryImages.forEach(i => i.classList.remove('is-expanded'));
-                    
-                    // Si elle n'était pas ouverte, on l'ouvre
-                    if (!isExpanded) {
-                        img.classList.add('is-expanded');
-                    }
+                img.addEventListener('click', () => {
+                    fullImg.src = img.src;
+                    overlay.classList.add('active');
+                    document.body.classList.add('gallery-open');
                 });
             });
 
-            // Fermer si on clique à côté
-            document.addEventListener('click', () => {
-                galleryImages.forEach(i => i.classList.remove('is-expanded'));
+            // Fonctions de fermeture
+            const closeGallery = () => {
+                overlay.classList.remove('active');
+                document.body.classList.remove('gallery-open');
+                setTimeout(() => { if(!overlay.classList.contains('active')) fullImg.src = ''; }, 300); // Nettoie la source après l'animation
+            };
+
+            overlay.addEventListener('click', () => {
+                closeGallery();
+            });
+
+            // Touche Échap
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && overlay.classList.contains('active')) {
+                    closeGallery();
+                }
             });
         });
     </script>
