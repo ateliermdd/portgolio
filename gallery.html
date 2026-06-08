@@ -8,33 +8,43 @@
     <script src="script.js" defer></script>
     <style>
 
-               .gallery-masonry img {
-            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), z-index 0.3s ease, box-shadow 0.3s ease;
+        .gallery-masonry {
+            /* Crée un contexte de perspective pour aider le moteur de rendu 3D */
+            perspective: 1000px;
+        }
+
+        .gallery-masonry img {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), z-index 0.3s ease, box-shadow 0.3s ease;
             position: relative;
             z-index: 1;
             display: block; /* Évite les décalages de ligne */
             transform-origin: center center;
+            /* Prépare le lissage sans créer de calque basse résolution prématuré */
+            backface-visibility: hidden;
+            -webkit-font-smoothing: subpixel-antialiased;
+            image-rendering: -webkit-optimize-contrast; /* Améliore la netteté sur Chrome/Safari */
         }
 
         /* Effet au survol (Desktop uniquement) */
         @media (hover: hover) and (min-width: 1001px) {
             .gallery-masonry img:hover {
-                transform: scale(5); /* Augmenté de 30% pour le desktop (7 * 1.3) */
+                transform: scale(5) translateZ(0);
                 z-index: 10;
             }
         }
 
         /* État agrandi (Toggle par clic/tap) - Version Mobile par défaut */
         .gallery-masonry img.is-expanded {
-            transform: scale(4) !important; /* Taille de base conservée pour le mobile */
+            /* translateZ(0) force le recalcul de la texture à la nouvelle taille */
+            transform: scale(4) translateZ(0) !important; 
             z-index: 100 !important;
-            outline: 1000vw solid rgba(255, 255, 255, 0); /* Aide à la détection de zone */
+            box-shadow: 0 0 50px rgba(0,0,0,0.3); /* Remplace l'outline pour l'emphase */
         }
 
         /* État agrandi spécifique Desktop (30% plus grand) */
         @media (min-width: 1001px) {
             .gallery-masonry img.is-expanded {
-                transform: scale(6) !important; /* Taille augmentée pour les grands écrans */
+                transform: scale(6) translateZ(0) !important;
             }
         }
 
