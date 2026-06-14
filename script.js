@@ -220,8 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
             desc_fr: 'Immersive journey created for a solidarity race in partnership with Nike Run in Paris. Art direction combining installation, photography, and large-format printing at Place de la République. Mar.2025',
             desc_en: 'Immersive journey created for a solidarity race in partnership with Nike Run in Paris. Art direction combining installation, photography, and large-format printing at Place de la République. Mar.2025',
             assets: [
-                'projets/sinequanon/visuel_01.gif',
                 'projets/sinequanon/visuel_03.webp',
+                'projets/sinequanon/visuel_01.gif',
                 'projets/sinequanon/visuel_02.webp',
                 'projets/sinequanon/visuel_04.webp',
                 'projets/sinequanon/visuel_05.webp',

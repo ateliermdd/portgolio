@@ -524,6 +524,11 @@ body.is-info .nav-left .nav-item {
 
 /* Adaptation du contraste selon la page ou l'état */
 body.is-info .site-footer { color: #fff; }
+@media (max-width: 768px) {
+    body.is-info .site-footer {
+        display: none;
+    }
+}
 body.overlay-open .site-footer { color: #000 !important; }
 
 body.is-info .projects-section {
@@ -796,6 +801,15 @@ body.project-open .main-logo {
     filter: grayscale(100%) sepia(20%) brightness(0.95) contrast(1.1); /* Rendu Noir et Beige */
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
     will-change: transform; /* Optimisation performance hover */
+}
+@media (max-width: 768px) {
+    .project-strip, .project-item {
+        height: 70vh; /* Hauteur relative au viewport pour éviter les débordements */
+    }
+    .project-item {
+        filter: none; /* Désactive les filtres gourmands sur mobile pour garantir la fluidité */
+        opacity: 0.9;
+    }
 }
 /* --- GALLERY PAGE --- */
 .is-gallery {
@@ -1133,12 +1147,6 @@ body.show-more-info div.col-clients.togglable-content {
     .info-right-content-wrapper {
         /* Ajustement du padding-bottom pour laisser de la place au footer fixe */
         padding: 80px 15px 60px 15px; 
-    }
-
-    /* Lisibilité Max : Simulation d'un bloc noir protecteur avec contours ultra-diffus */
-    body.is-info.show-more-info .info-right-content-wrapper {
-        background: rgba(0, 0, 0, 0.85); /* Bloc noir intense */
-        box-shadow: 0 0 80px 80px rgba(0, 0, 0, 0.85); /* Halo de diffusion profond */
     }
 }
 
