@@ -877,7 +877,7 @@ body.is-info .projects-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.5s ease-in-out;
+    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .preloader-gif {
@@ -1273,8 +1273,8 @@ body.overlay-open .nav-right a[href*="info.html"] {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
-    z-index: 90; /* Sous le header (100), sur le contenu */
+    background-color: transparent;
+    z-index: 940; /* Doit être au-dessus de la nav_blur (930) pour être cliquable */
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.4s ease, visibility 0.4s ease;
@@ -1293,13 +1293,13 @@ body.overlay-open .nav-right a[href*="info.html"] {
     left: 20px; /* Aligné sur la colonne GALLERY (padding header) */
     transform: translateY(-50%);
     width: 220px;
-    z-index: 95; /* Au-dessus des images */
+    z-index: 5000; /* PASSE AU-DESSUS DU HEADER (4000) pour garantir le clic */
     color: #1b110a;
-    pointer-events: none; /* Laisse passer le clic vers les images si besoin, sauf sur les boutons */
+    pointer-events: auto; /* Zone protégée : les clics ici ne ferment pas le projet */
+    isolation: isolate; /* Protège le contexte de rendu pour le bouton FR/EN */
 }
 
 .project-text-layer > * {
-    pointer-events: auto; /* Réactive le clic sur le texte et bouton */
 }
 
 .project-title {
@@ -1319,40 +1319,28 @@ body.overlay-open .nav-right a[href*="info.html"] {
     color: #1b110a;
     text-transform: none !important;
 }
-
-.project-close-btn {
+.project-lang-toggle {
     background: none;
     border: none;
     font-family: 'NimbusRoman', serif;
     font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #000000;
-    padding: 0;
-}
-
-.project-lang-toggle {
-    background: none;
-    border: none;
-    font-family: 'NimbusRomanBold', serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: #818181;
-    padding: 0;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    line-height: 1.3;
+    color: #b4b4b4;
+    mix-blend-mode: difference;
+    padding: 10px 20px 10px 0; /* AGRANDIT LA ZONE CLIQUABLE sans changer le visuel */
     margin-left: 0px;
-    cursor: none;
-    pointer-events: auto;
     display: inline-block;
     vertical-align: baseline;
+    position: relative;
+    z-index: 5001;
+    pointer-events: auto !important; /* Force la cliquabilité */
+    cursor: none;
 }
 
 .project-lang-toggle:hover {
-    font-family: 'NimbusRomanItalic', serif;
-    font-style: italic;
-}
-
-.project-close-btn:hover {
     font-family: 'NimbusRomanItalic', serif;
     font-style: italic;
 }
@@ -1409,6 +1397,28 @@ body.overlay-open .nav-right a[href*="info.html"] {
 
 
 
+/* =========================================
+   NAV_BLUR SYSTEM (Global)
+   ========================================= */
+
+.nav_blur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    z-index: 930;  /* Doit être supérieur au 910 des images dans l'index.html */
+    pointer-events: none;
+    transform: translateZ(0);
+    display: block; /* S'assure qu'il est visible sur desktop */
+    top: 0px; /* Positionné directement sous le header */
+    backdrop-filter: blur(8px); /* Intensité de flou de la 3ème bande en partant du bas */
+    -webkit-backdrop-filter: blur(8px);
+    /* Masque pour estomper la vitre en bas, créant une transition douce */
+    mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
+}
+
 /* --- Responsive Mobile --- */
 @media (max-width: 1024px) {
      #project-overlay {
@@ -1418,16 +1428,17 @@ body.overlay-open .nav-right a[href*="info.html"] {
     }
 
     .project-text-layer {
-        position: relative;
+        position: fixed; /* Le bloc texte devient fixe en haut de l'écran */
         inset: auto;
         top: 0;
         left: 0;
         transform: none;
         width: 100%;
-        padding: 70px 20px 20px 20px; /* Bloc remonté vers le haut avec un gap réduit */
-        z-index: 100;
+        padding: 140px 20px 20px 20px; /* Remonté pour être plus haut sur la page */
+        z-index: 5000; /* Passe aussi au-dessus du header sur mobile */
         display: block;
         pointer-events: auto;
+        background-color: transparent; /* S'assure que le fond est transparent */
     }
 
     .project-title,
@@ -1440,8 +1451,9 @@ body.overlay-open .nav-right a[href*="info.html"] {
         left: 0;
         width: 100%;
         height: auto;
-        padding: 0 20px 80px 20px;
-        padding: 100px 20px 80px 20px; /* Augmenté pour abaisser les images sous le texte */
+        z-index: 90; /* Positionné sous la lentille de flou */
+        /* Ajustement du padding-top pour laisser de l'espace sous le bloc texte fixe */
+        padding: 200px 20px 80px 20px; /* Marge généreuse pour que les images commencent sous le texte */
         flex-direction: column;
         overflow: visible; /* Let #project-overlay handle the scroll */
         align-items: flex-start;

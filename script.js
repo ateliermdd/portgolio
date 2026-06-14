@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const projects = {
         agence_dici: {
             title: 'AGENCE DICI',
-            desc_fr: 'Conception de l’identité visuelle d’une agence immobilière indépendante. Un projet global mêlant design d’espace, mobilier, photographie et communication publicitaire. Déc.2025',
+            desc_fr: 'Visual identity design for an independent real estate agency. A global project blending spatial design, furniture, photography, and advertising communication. Dec.2025',
             desc_en: 'Visual identity design for an independent real estate agency. A global project blending spatial design, furniture, photography, and advertising communication. Dec.2025',
             assets: [
                 'projets/dici/dici_images-01.webp',
@@ -181,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         the_culture_evolves: {
             title: 'THE CULTURE EVOLVES',
-            desc_fr: 'Création d’une narration visuelle et d’un motion design pour une institution culturelle. Une direction artistique pensée pour traduire un discours muséal dans un langage contemporain.Fév.2025',
+            desc_fr: 'Creation of a visual narrative and motion design for a cultural institution. An art direction designed to translate museum discourse into a contemporary language. Feb.2025',
             desc_en: 'Creation of a visual narrative and motion design for a cultural institution. An art direction designed to translate museum discourse into a contemporary language. Feb.2025',
             assets: [
                 'projets/motion%20culture/culture%20evolves_low.mp4',
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         keblack: {
             title: 'KEBLACK',
-            desc_fr: 'Identité visuelle créée pour un label de musique franco-congolais autour d’un travail typographique inspiré d’un masque traditionnel. Recherche autour du signe, du logo et du dessin de lettre. Jan.2026',
+            desc_fr: 'Visual identity created for a French-Congolese music label centered on typographic work inspired by a traditional mask. Research on the sign, logo, and letter design. Jan.2026',
             desc_en: 'Visual identity created for a French-Congolese music label centered on typographic work inspired by a traditional mask. Research on the sign, logo, and letter design. Jan.2026',
             assets: [
                 'projets/keblack/keblack_post_0-01.webp',
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         cop1: {
             title: 'COP1',
-            desc_fr: 'Film publicitaire développé au sein de l’agence Ici Barbès. Direction artistique, photographie et design graphique en collaboration avec la conceptrice-rédactrice. Sep.2025',
+            desc_fr: 'Advertising film developed within the Ici Barbès agency. Art direction, photography, and graphic design in collaboration with the copywriter. Sep.2025',
             desc_en: 'Advertising film developed within the Ici Barbès agency. Art direction, photography, and graphic design in collaboration with the copywriter. Sep.2025',
             assets: [
                 'projets/cop1/cop1_05.webp',
@@ -217,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         sinequanon: {
             title: 'SINEQUANON',
-            desc_fr: 'Parcours immersif réalisé pour une course solidaire en partenariat avec Nike Run à Paris. Direction artistique entre installation, photographie et impression grand format sur la Place de la République. Mar.2025',
+            desc_fr: 'Immersive journey created for a solidarity race in partnership with Nike Run in Paris. Art direction combining installation, photography, and large-format printing at Place de la République. Mar.2025',
             desc_en: 'Immersive journey created for a solidarity race in partnership with Nike Run in Paris. Art direction combining installation, photography, and large-format printing at Place de la République. Mar.2025',
             assets: [
                 'projets/sinequanon/visuel_01.gif',
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         memoire: {
             title: 'MÉMOIRE',
-            desc_fr: 'Magazine identitaire autour de la mode et de l’appropriation culturelle. Entre écriture, édition et entretiens, ce mémoire questionne les récits visuels contemporains. Sep.2024',
+            desc_fr: 'Identity magazine about fashion and cultural appropriation. Combining writing, editing, and interviews, this thesis questions contemporary visual narratives. Sep.2024',
             desc_en: 'Identity magazine about fashion and cultural appropriation. Combining writing, editing, and interviews, this thesis questions contemporary visual narratives. Sep.2024',
             assets: [
                 'projets/memoire/memoire_post_09.webp',
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         sunburn: {
             title: 'SUNBURN',
-            desc_fr: 'Collaboration artistique avec le designer Nino autour d’un clip musical expérimental. Entre photographie, vidéo et design visuel, le projet puise son inspiration en Thaïlande. Mar.2026',
+            desc_fr: 'Artistic collaboration with designer Nino for an experimental music video. Combining photography, video, and visual design, the project draws its inspiration from Thailand. Mar.2026',
             desc_en: 'Artistic collaboration with designer Nino for an experimental music video. Combining photography, video, and visual design, the project draws its inspiration from Thailand. Mar.2026',
             assets: [
                 'projets/sunburn/visuel_01.webp',
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         creolisation: {
             title: 'CRÉOLISATION',
-            desc_fr: 'Installation artistique autour de la créolisation présentée dans un espace muséal en collaboration avec le Musée de l’histoire de l’immigration à Paris. Un projet mêlant scénographie, photographie, création d’objets et recherche plastique. Oct.2025',
+            desc_fr: 'Artistic installation centered on creolization presented in a museum space in collaboration with the Musée de l\'histoire de l\'immigration in Paris. A project blending scenography, photography, object creation, and plastic research. Oct.2025',
             desc_en: 'Artistic installation centered on creolization presented in a museum space in collaboration with the Musée de l\'histoire de l\'immigration in Paris. A project blending scenography, photography, object creation, and plastic research. Oct.2025',
             assets: [
                 'projets/pfe/visuel_01.webp',
@@ -274,7 +274,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         tha: {
             title: 'THA',
-            desc_fr: 'Création de l’identité d’une marque de cosmétique thaïlandaise. Direction artistique globale entre photographie, packaging et design digital. Avr.2026',
+            desc_fr: 'Creation of the identity for a Thai cosmetic brand. Global art direction including photography, packaging, and digital design. Apr.2026',
             desc_en: 'Creation of the identity for a Thai cosmetic brand. Global art direction including photography, packaging, and digital design. Apr.2026',
             assets: [
                 'projets/tha/visuel_01.webp',
@@ -288,7 +288,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         andersson_bell: {
             title: "ANDERSSON BELL",
-            desc_fr: "Projet personnel autour de la création d’un showroom mêlant espace, narration visuelle et scénographie. Direction artistique inspirée du dialogue entre design scandinave et esthétique sud-coréenne. Mai.2026",
+            desc_fr: "Personal project around the creation of a showroom blending space, visual narrative, and scenography. Art direction inspired by the dialogue between Scandinavian design and South Korean aesthetics. May.2026",
             desc_en: "Personal project around the creation of a showroom blending space, visual narrative, and scenography. Art direction inspired by the dialogue between Scandinavian design and South Korean aesthetics. May.2026",
             assets: [
                 'projets/adsb/adsb01.webp',
@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         japon: {
             title: 'JAPON',
-            desc_fr: 'Série photographique réalisée au Japon, explorant les scènes de rue et l’atmosphère urbaine d’Osaka. Un regard documentaire sur le quotidien et l’esthétique japonaise. Mai.2026',
+            desc_fr: 'Photographic series taken in Japan, exploring the street scenes and urban atmosphere of Osaka. A documentary look at daily life and Japanese aesthetics. May.2026',
             desc_en: 'Photographic series taken in Japan, exploring the street scenes and urban atmosphere of Osaka. A documentary look at daily life and Japanese aesthetics. May.2026',
             assets: [
                 'projets/japon/street01.webp',
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         default: {
             title: 'BRANDING PROJECT',
-            desc_fr: 'Description du projet à venir. Exploration graphique et direction artistique.',
+            desc_fr: 'Upcoming project description. Graphic exploration and art direction.',
             desc_en: 'Upcoming project description. Graphic exploration and art direction.',
             assets: Array.from({ length: 8 }, (_, i) => `https://picsum.photos/${i % 2 === 0 ? 800 : 1200}/${i % 2 === 0 ? 1200 : 800}?random=default${i}`)
         }
@@ -330,10 +330,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const descEl = overlay ? overlay.querySelector('.project-description') : null;
     const galleryEl = overlay ? overlay.querySelector('.project-gallery-layer') : null;
     const closeBtn = overlay ? overlay.querySelector('.project-close-btn') : null;
+    const langBtn = overlay ? overlay.querySelector('.project-lang-toggle') : null;
+    const textLayer = overlay ? overlay.querySelector('.project-text-layer') : null;
     
     const videoOverlay = document.getElementById('video-overlay');
     const videoPlayer = document.getElementById('fullscreen-video');
     const videoCloseBtn = document.getElementById('video-close-btn');
+
+    // --- INITIALISATION DES ÉVÉNEMENTS DE L'OVERLAY ---
+
+    // Changement de langue
+    if (langBtn) {
+        langBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            currentLang = currentLang === 'fr' ? 'en' : 'fr';
+            if (currentProjectData && descEl) {
+                descEl.textContent = currentLang === 'fr' ? currentProjectData.desc_fr : currentProjectData.desc_en;
+            }
+        });
+    }
+
+    // Empêcher la fermeture de l'overlay quand on clique sur le bloc texte
+    if (textLayer) {
+        textLayer.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeProject);
+    }
 
     function openProject(projectTitle) {
         if (!overlay || !titleEl || !descEl || !galleryEl) return;
@@ -347,26 +374,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Injecter le texte
         titleEl.textContent = data.title;
         descEl.textContent = currentLang === 'fr' ? data.desc_fr : data.desc_en;
-
-        // Gestion du bouton FR / EN
-        let langBtn = overlay.querySelector('.project-lang-toggle');
-        if (!langBtn) {
-            langBtn = document.createElement('button');
-            langBtn.className = 'project-lang-toggle';
-            langBtn.textContent = 'FR / EN';
-            
-            titleEl.style.display = 'inline-block';
-            titleEl.after(langBtn);
-
-            langBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                currentLang = currentLang === 'fr' ? 'en' : 'fr';
-                if (currentProjectData) {
-                    descEl.textContent = currentLang === 'fr' ? currentProjectData.desc_fr : currentProjectData.desc_en;
-                }
-            });
-        }
 
         // Vider la galerie et la remplir avec les images du projet cliqué
         galleryEl.innerHTML = '';
@@ -425,7 +432,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 galleryEl.appendChild(element);
             });
         }
-
+ // Ajout du second bouton CLOSE à la fin de la galerie (flux du scroll)
+        const bottomCloseBtn = document.createElement('button');
+        bottomCloseBtn.className = 'project-close-btn project-close-btn-bottom';
+        bottomCloseBtn.textContent = 'CLOSE';
+        bottomCloseBtn.addEventListener('click', (e) => { e.preventDefault(); closeProject(); });
+        galleryEl.appendChild(bottomCloseBtn);
         // Activer l'overlay et les styles globaux
         overlay.classList.add('active');
         document.body.classList.add('project-open');
@@ -484,8 +496,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeProject);
+    // Fermer le projet au clic n'importe où sur l'overlay (Desktop uniquement)
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (window.innerWidth <= 1024) return;
+
+            // Si le clic est dans le bloc texte (ou ses enfants), on ne ferme pas
+            if (e.target.closest('.project-text-layer')) return;
+
+            closeProject();
+        });
     }
 
     // Bouton Close de la vidéo : history.back()
