@@ -303,8 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/adsb/adsb10.webp'
             ]
         },
-        japon: {
-            title: 'JAPON',
+        osaka: {
+            title: 'OSAKA',
             desc_fr: 'Photographic series taken in Japan, exploring the street scenes and urban atmosphere of Osaka. A documentary look at daily life and Japanese aesthetics. May.2026',
             desc_en: 'Photographic series taken in Japan, exploring the street scenes and urban atmosphere of Osaka. A documentary look at daily life and Japanese aesthetics. May.2026',
             assets: [
