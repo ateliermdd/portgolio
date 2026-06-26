@@ -89,13 +89,15 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             autoScroll();
         }
-document.querySelector('.project-strip').addEventListener('mouseenter', () => {
-  document.querySelector('.cursor-follower').classList.add('project-hover');
-});
+        if (strip) {
+            strip.addEventListener('mouseenter', () => {
+                if (cursor) cursor.classList.add('project-hover');
+            });
 
-document.querySelector('.project-strip').addEventListener('mouseleave', () => {
-  document.querySelector('.cursor-follower').classList.remove('project-hover');
-});
+            strip.addEventListener('mouseleave', () => {
+                if (cursor) cursor.classList.remove('project-hover');
+            });
+        }
         // Gestion Overlay Contact centralisée
         const contactBtn = document.getElementById('contact-btn');
         const contactOverlay = document.getElementById('contact-overlay');
