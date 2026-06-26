@@ -424,37 +424,37 @@
   }
 }
 @font-face {
-    font-family: 'TexGyreHerosCn';
-    src: url('fonts/texgyreheroscn-regular.woff') format('woff');
+    font-family: 'europagroshop-dembol';
+    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'NimbusRoman';
-    src: url('fonts/nimbus-roman-no9-l.regular.otf') format('opentype');
+    font-family: 'europagroshop-dembol';
+    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'NimbusRomanBold';
-    src: url('fonts/nimbus-roman-no9-l.regular.otf') format('opentype');
+    font-family: 'europagroshop-dembol';
+    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: 'NimbusRomanItalic';
-    src: url('fonts/nimbus-roman-no9-l.regular-italic.otf') format('opentype');
+    font-family: 'europagroshop-dembol';
+    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-    font-family: 'TexGyreHerosCn-Bold';
-    src: url('fonts/texgyreheroscn-bold.woff') format('woff');
-    font-weight: bold;
+    font-family: 'europagroshop-dembol';
+    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
+    font-weight: normal;
     font-style: normal;
 }
 
@@ -462,7 +462,7 @@
     --bg-color: #ffffff;
     --text-color: #000000;
     --accent-color: var(--text-color);
-    --font-main: 'NimbusRoman', serif;
+    --font-main: 'europagroshop-dembol', serif;
     --text-size: 8px; /* Taille unifiée pour tout le texte */
     --header-link-color: #000000;
     --header-link-hover-color: var(--header-link-color);
@@ -513,8 +513,9 @@ body.is-info .nav-left .nav-item {
     left: 0;
     width: 100%;
     z-index: 5000; /* Toujours visible au-dessus du contenu */
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 9px;
+    letter-spacing: 0.03em;
     text-align: center;
     text-transform: none;
     pointer-events: none; /* Permet de cliquer sur le contenu situé derrière */
@@ -544,10 +545,10 @@ body.is-info .cursor-follower {
     position: fixed;
     top: 0;
     left: 0;
-    width: 12px;
-    height: 12px;
+    width: 8px;
+    height: 8px;
     background-color: var(--text-color);
-    border-radius: 50%;
+    border-radius: 1%;
     pointer-events: none;
     z-index: 9999;
     transform: translate(-50%, -50%);
@@ -557,10 +558,16 @@ body.is-info .cursor-follower {
     justify-content: center;
     white-space: nowrap;
     font-size: 12px;
-    color: #fff;
+    color: #ffffff;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+
+.cursor-follower.project-hover {
+   mix-blend-mode: difference;
+  background-color: var(--text-color);
+}
+
 
 .cursor-follower.active {
     width: auto;
@@ -572,7 +579,7 @@ body.is-info .cursor-follower {
 
 /* --- Correction du conflit Curseur / Texte sur Info --- */
 .cursor-follower.nav-hover {
-    background-color: transparent !important;
+    background-color: black !important;
     border: 1px solid currentColor; /* Utilise la couleur du texte (blanc sur info, noir sur index) */
 }
 
@@ -584,7 +591,8 @@ body.is-info .cursor-follower {
     top: 0;
     left: 0;
     z-index: 4000; /* Le plus élevé pour que la navigation soit toujours cliquable */
-    font-family: 'NimbusRomanBold', serif;
+    font-family: 'europagroshop-dembol', serif;
+    letter-spacing: 0.05em;
     pointer-events: none; /* Laisse passer les clics à travers le header vide */
 }
 
@@ -609,7 +617,7 @@ body.is-info .cursor-follower {
 
 .site-header .nav-item:hover {
     color: var(--header-link-hover-color);
-    font-family: 'NimbusRomanItalic', serif;
+    font-family: 'europagroshop-dembol', serif;
 }
 
 .site-header .nav-right {
@@ -635,15 +643,15 @@ body.is-info .cursor-follower {
     mix-blend-mode: difference;
 
     /* Typographie compacte et responsive */
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-style: regular;
-    font-size: clamp(8px, 0.5vw, 12px); /* Assure une taille lisible, s'adapte mais ne devient pas trop petit */
-    color: #000000; /* Indispensable pour l'effet différence sur fond blanc */
-    text-transform: uppercase;
+    font-size: 62px; /* Assure une taille lisible, s'adapte mais ne devient pas trop petit */
+    color: #f1f1f1; /* Indispensable pour l'effet différence sur fond blanc */
+    text-transform: none;
     line-height: 1; /* Assure que le texte ne se chevauche pas */
-    letter-spacing: 0.6em;
+    letter-spacing: 0.04em;
     white-space: nowrap;
-    animation: expertise-marquee 70s linear infinite;
+    animation: expertise-marquee 100s linear infinite;
     will-change: transform;
 }
 
@@ -743,7 +751,7 @@ body.project-open .main-logo {
 
 .subtext:hover {
     color: var(--header-link-hover-color);
-    font-family: 'NimbusRomanItalic', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-style: italic;
 }
 
@@ -999,20 +1007,21 @@ body.is-info .hero {
 }
 
 .approach-text {
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 12.6px; /* Réduit de 0.3pt (approx 0.4px) */
     line-height: 1.3;
     max-width: none;
     margin: 0;
     text-transform: none !important;
+     letter-spacing: 0.08em;
 }
 
 /* Titres de sections (Clients, Exhibitions, Experience) */
 .list-title {
-    font-family: 'NimbusRoman', serif;
-    font-size: 11px; /* Réduit de 0.3pt */
+    font-family: 'europagroshop-dembol', serif;
+    font-size: 10.8px; /* Réduit de 0.3pt */
     text-transform: uppercase;
-    letter-spacing: 0em; /* Adjusted letter spacing */
+    letter-spacing: 0.2em; /* Adjusted letter spacing */
     margin-bottom: 20px; /* Marge identique pour toutes les sections */
     color: #ffffff;
     opacity: 1;
@@ -1027,7 +1036,7 @@ body.is-info .hero {
     padding: 0;
     margin-top: 20px;
     color: #fcff5e;
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 12.6px; /* Réduit de 0.3pt */
     letter-spacing: 0.1em;
     display: block; /* Force le passage à la ligne sous l'approche */
@@ -1036,7 +1045,7 @@ body.is-info .hero {
 }
 
 .more-info-toggle-btn:hover {
-    font-family: 'NimbusRomanItalic', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-style: italic;
 }
 
@@ -1075,11 +1084,12 @@ body.show-more-info div.col-clients.togglable-content {
 }
 
 .client-subtitle{
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 12.6px; /* Réduit de 0.3pt */
     opacity: 30%; /* Keep opacity */
     color: rgba(255, 255, 255, 0.817); /* Keep color */
     line-height: 1.1;
+    letter-spacing: 0.09em;
     margin-bottom: 2px;
 }
 
@@ -1095,9 +1105,10 @@ body.show-more-info div.col-clients.togglable-content {
 }
 
 .clean-list li {
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 12.6px; /* Réduit de 0.3pt */
-    line-height: 1.1; /* Reduced line height */
+    line-height: 1.3; /* Reduced line height */
+    letter-spacing: 0.09em;
     margin-bottom: 2px; /* Adjusted margin */
 }
 
@@ -1191,7 +1202,7 @@ body.show-more-info div.col-clients.togglable-content {
 }
 
 .contact-tagline {
-    font-family: 'NimbusRomanBold', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 1.1rem; 
     color: white;
     text-decoration: none;
@@ -1214,7 +1225,7 @@ body.show-more-info div.col-clients.togglable-content {
 }
 
 .contact-item {
-    font-family: 'NimbusRomanBold', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 1.1rem;
     color: rgb(0, 0, 0);
     text-decoration: none; /* Supprime le soulignement par défaut */
@@ -1238,7 +1249,7 @@ body.show-more-info div.col-clients.togglable-content {
 .contact-phone:hover,
 .contact-instagram:hover,
 .contact-linkedin:hover {
-    font-family: 'NimbusRomanItalic', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-style: italic;
     text-decoration: none; /* Pas de soulignement au survol */
 }
@@ -1310,7 +1321,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
 }
 
 .project-title {
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-size: 24px; /* Ajustable selon besoin */
     text-transform: uppercase;
     line-height: 1.3;
@@ -1318,7 +1329,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
 }
 
 .project-description {
-    font-family: 'Nimbusbold', bold;
+    font-family: 'europagroshop-dembol', normal;
     font-size: 10px !important;
     letter-spacing: 0.08em !important;
     line-height: 1.3;
@@ -1329,7 +1340,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
 .project-lang-toggle {
     background: none;
     border: none;
-    font-family: 'NimbusRoman', serif;
+    font-family: 'europagroshop-demboln', serif;
     font-size: 10px;
     font-weight: normal;
     text-transform: none;
@@ -1348,7 +1359,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
 }
 
 .project-lang-toggle:hover {
-    font-family: 'NimbusRomanItalic', serif;
+    font-family: 'europagroshop-dembol', serif;
     font-style: italic;
 }
 
@@ -1403,6 +1414,12 @@ body.overlay-open .nav-right a[href*="info.html"] {
 }
 
 
+/* --- MOBILE BREAK FIX --- */
+@media (max-width: 768px) {
+  .mobile-break {
+    display: block;
+  }
+}
 
 /* =========================================
    NAV_BLUR SYSTEM (Global)

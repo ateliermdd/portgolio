@@ -89,7 +89,13 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             autoScroll();
         }
+document.querySelector('.project-strip').addEventListener('mouseenter', () => {
+  document.querySelector('.cursor-follower').classList.add('project-hover');
+});
 
+document.querySelector('.project-strip').addEventListener('mouseleave', () => {
+  document.querySelector('.cursor-follower').classList.remove('project-hover');
+});
         // Gestion Overlay Contact centralisée
         const contactBtn = document.getElementById('contact-btn');
         const contactOverlay = document.getElementById('contact-overlay');
@@ -347,6 +353,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentLang = currentLang === 'fr' ? 'en' : 'fr';
             if (currentProjectData && descEl) {
                 descEl.textContent = currentLang === 'fr' ? currentProjectData.desc_fr : currentProjectData.desc_en;
+                preventWidows(descEl);
             }
         });
     }
@@ -361,7 +368,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) {
         closeBtn.addEventListener('click', closeProject);
     }
+function preventWidows(element) {
+    if (!element) return;
 
+    element.innerHTML = element.innerHTML.replace(
+        /(\S+)\s+(\S+)\s*$/,
+        '$1&nbsp;$2'
+    );
+}
     function openProject(projectTitle) {
         if (!overlay || !titleEl || !descEl || !galleryEl) return;
 
@@ -372,8 +386,14 @@ document.addEventListener('DOMContentLoaded', () => {
         currentProjectData = data;
 
         // Injecter le texte
-        titleEl.textContent = data.title;
-        descEl.textContent = currentLang === 'fr' ? data.desc_fr : data.desc_en;
+titleEl.textContent = data.title;
+descEl.textContent = currentLang === 'fr'
+    ? data.desc_fr
+    : data.desc_en;
+
+// Empêche le dernier mot de passer seul à la ligne
+preventWidows(titleEl);
+preventWidows(descEl);
 
         // Vider la galerie et la remplir avec les images du projet cliqué
         galleryEl.innerHTML = '';
