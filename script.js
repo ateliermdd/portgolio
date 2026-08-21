@@ -423,7 +423,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/japon/street04.webp',
                 'projets/japon/street05.webp',
                 'projets/japon/street06.webp',
-                'projets/japon/street07.webp'
+                'projets/japon/street09.webp',
+                'projets/japon/street08.webp',
+                'projets/japon/street07.webp',
+                'projets/japon/street10.webp'
             ]
         },
         madamemo: {
