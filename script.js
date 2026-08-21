@@ -64,31 +64,132 @@ document.addEventListener('DOMContentLoaded', () => {
                 cursor.classList.remove('active');
             }
         });
-
-        // Initialisation de la bande défilante infinie
+        // Initialisation de la bande de projets (infinie et en boucle continue)
         const strip = document.querySelector('.project-strip');
         const track = document.querySelector('.project-track');
         if (strip && track) {
             const items = Array.from(track.children);
-            // Duplication pour assurer la continuité du scroll
+            
+            // 1. Duplication pour assurer la continuité du scroll (Set 3 à la fin)
             items.forEach(item => track.appendChild(item.cloneNode(true)));
-            items.forEach(item => track.insertBefore(item.cloneNode(true), track.firstChild));
+            
+            // 2. Duplication pour le Set 1 (au début) - dans l'ordre inverse pour conserver l'ordre correct
+            for (let i = items.length - 1; i >= 0; i--) {
+                track.insertBefore(items[i].cloneNode(true), track.firstChild);
+            }
 
-            const originalWidth = track.scrollWidth / 3;
-            strip.scrollLeft = originalWidth;
+            // Calcul de la largeur d'une seule série de projets
+            let originalWidth = track.scrollWidth / 3;
+            if (originalWidth > 0) {
+                // Se positionner au début du Set 2 (le set du milieu)
+                strip.scrollLeft = originalWidth;
+            }
 
-            strip.addEventListener('scroll', () => {
-                if (strip.scrollLeft >= originalWidth * 2) strip.scrollLeft -= originalWidth;
-                else if (strip.scrollLeft <= 0) strip.scrollLeft += originalWidth;
+            // Mettre à jour en cas de redimensionnement de l'écran (ex. rotation mobile)
+            window.addEventListener('resize', () => {
+                originalWidth = track.scrollWidth / 3;
+                if (originalWidth > 0) {
+                    if (strip.scrollLeft >= originalWidth * 2 || strip.scrollLeft < originalWidth) {
+                        strip.scrollLeft = originalWidth;
+                    }
+                }
             });
 
+            // 3. Gestion du rebouclage infini lors du scroll (conserve l'utilisateur dans le Set 2)
+            strip.addEventListener('scroll', () => {
+                if (originalWidth > 0) {
+                    if (strip.scrollLeft >= originalWidth * 2) {
+                        strip.scrollLeft -= originalWidth;
+                    } else if (strip.scrollLeft < originalWidth) {
+                        strip.scrollLeft += originalWidth;
+                    }
+                }
+            });
+
+            // 4. Interaction de drag (glissement) manuel (clic gauche)
+            let isDown = false;
+            let startX;
+            let totalWalk = 0;
+            let isDragging = false;
+            let isUserInteracting = false;
+            let interactionTimeout;
+
+            const handleUserInteraction = () => {
+                isUserInteracting = true;
+                clearTimeout(interactionTimeout);
+                interactionTimeout = setTimeout(() => {
+                    isUserInteracting = false;
+                }, 2000); // Reprend l'auto-scroll 2s après la fin des interactions
+            };
+
+            strip.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            });
+
+            strip.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return; // Clic gauche uniquement
+                isDown = true;
+                isDragging = false;
+                startX = e.pageX;
+                totalWalk = 0;
+                handleUserInteraction();
+            });
+
+            strip.addEventListener('mouseleave', () => {
+                isDown = false;
+            });
+
+            strip.addEventListener('mouseup', () => {
+                isDown = false;
+            });
+
+            strip.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX;
+                const deltaX = (x - startX) * 1.5;
+                startX = x;
+                totalWalk += Math.abs(deltaX);
+                if (totalWalk > 10) {
+                    isDragging = true;
+                }
+                strip.scrollLeft -= deltaX;
+                handleUserInteraction();
+            });
+
+            // Empêche le clic d'ouvrir le projet en fin de drag
+            strip.addEventListener('click', (e) => {
+                if (isDragging) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isDragging = false;
+                }
+            }, true); // Phase de capture indispensable
+
+            // 5. Support du scroll vertical de la souris pour naviguer horizontalement
+            strip.addEventListener('wheel', (e) => {
+                if (e.deltaY !== 0 && e.deltaX === 0) {
+                    e.preventDefault();
+                    strip.scrollLeft += e.deltaY;
+                    handleUserInteraction();
+                }
+            }, { passive: false });
+
+            // 6. Gestion du Touch pour suspendre l'auto-scroll mobile lors du scroll manuel tactile
+            strip.addEventListener('touchstart', handleUserInteraction, { passive: true });
+            strip.addEventListener('touchmove', handleUserInteraction, { passive: true });
+
+            // 7. Auto-scroll (actif uniquement sur Mobile)
             const autoScroll = () => {
-                const speed = window.innerWidth <= 768 ? 1.5 : 0.5;
-                strip.scrollLeft += speed;
+                const isMobile = window.innerWidth <= 768;
+                if (isMobile && !isDown && !isUserInteracting) {
+                    strip.scrollLeft += 1.5; // Vitesse de défilement sur mobile
+                }
                 requestAnimationFrame(autoScroll);
             };
             autoScroll();
         }
+
         if (strip) {
             strip.addEventListener('mouseenter', () => {
                 if (cursor) cursor.classList.add('project-hover');
@@ -325,11 +426,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/japon/street07.webp'
             ]
         },
-        default: {
-            title: 'BRANDING PROJECT',
-            desc_fr: 'Upcoming project description. Graphic exploration and art direction.',
-            desc_en: 'Upcoming project description. Graphic exploration and art direction.',
-            assets: Array.from({ length: 8 }, (_, i) => `https://picsum.photos/${i % 2 === 0 ? 800 : 1200}/${i % 2 === 0 ? 1200 : 800}?random=default${i}`)
+        madamemo: {
+            title: 'MADAME MO',
+            desc_fr: 'A short film freely conceived for musical artist Calem Novo. Directed, produced and edited by Maïssane Dia-Deverre. Combining live-action footage, mixed media, 3D, visual experimentation and post-production. August 2026',
+            desc_en: 'A short film freely conceived for musical artist Calem Novo. Directed, produced and edited by Maïssane Dia-Deverre. Combining live-action footage, mixed media, 3D, visual experimentation and post-production. August 2026',
+            assets: [
+                'projets/madamemo/madamemo_poster.webp',
+                'projets/madamemo/short_film_mo.mp4'
+            ]
         }
     };
 
