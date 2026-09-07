@@ -11,17 +11,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // First visit in this session, show the preloader
         document.body.classList.add('preloading');
 
-        // T = 1s : Début du fade out
+        // Affichage un peu plus long avant le début du fondu
         setTimeout(() => {
             preloader.style.opacity = '0';
 
-            // After the CSS transition (0.5s), remove the element
+            // Attend la fin réelle de la transition CSS (1.6s) avant de retirer l'élément
             setTimeout(() => {
                 preloader.remove();
                 document.body.classList.remove('preloading');
                 initPage();
-            }, 500);
-        }, 1000);
+            }, 1600);
+        }, 1500);
 
         // Set the flag in sessionStorage so it doesn't show again
         sessionStorage.setItem('preloaderShown', 'true');
@@ -37,33 +37,104 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function initPage() {
         const cursor = document.querySelector('.cursor-follower');
+        const navCursor = document.getElementById('nav-cursor');
         const navItems = document.querySelectorAll('.nav-item');
         let isNavHover = false;
 
-        // Gestion du curseur personnalisé
-        if (window.matchMedia("(pointer: fine)").matches) {
-            document.addEventListener('mousemove', (e) => {
-                let transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-                if (isNavHover) transform += ' scale(1.5)';
-                if (cursor) cursor.style.transform = transform;
-            });
+        // --- Curseur directionnel : état + utilitaires ---
+        let navCursorLockUntil = 0;
+
+        function flashNavCursor(symbol) {
+            if (!navCursor) return;
+            navCursor.textContent = symbol;
+            navCursor.classList.remove('nav-cursor-confirm');
+            void navCursor.offsetWidth; // relance l'animation CSS
+            navCursor.classList.add('nav-cursor-confirm');
+            navCursorLockUntil = performance.now() + 260;
         }
 
+        function getStripJumpDistance() {
+            const item = strip ? strip.querySelector('.project-item') : null;
+            if (item) {
+                const rect = item.getBoundingClientRect();
+                return rect.width * 2.5 + 20; // ~2-3 vignettes
+            }
+            return window.innerWidth * 0.35;
+        }
+
+        function getGalleryJumpDistance(el) {
+            const item = el ? el.querySelector('.project-gallery-img') : null;
+            if (item) {
+                const rect = item.getBoundingClientRect();
+                return rect.width * 2.2 + 16; // ~2-3 images
+            }
+            return window.innerWidth * 0.45;
+        }
+
+       if (window.matchMedia("(pointer: fine)").matches) {
+    document.addEventListener('mousemove', (e) => {
+
+        let transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+
+        if (isNavHover) transform += ' scale(1.5)';
+
+        if (cursor) {
+            cursor.style.transform = transform;
+        }
+
+        /* Curseur directionnel indépendant : Desktop, index + projet ouvert uniquement */
+        const isDesktop = window.innerWidth >= 1025;
+        const isIndex = !document.body.classList.contains('is-gallery') &&
+                        !document.body.classList.contains('is-info');
+        const isContactOpen = document.body.classList.contains('overlay-open');
+
+        if (navCursor && isDesktop && isIndex && !isContactOpen) {
+            navCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+            if (performance.now() > navCursorLockUntil) {
+                navCursor.textContent = e.clientX < window.innerWidth / 2 ? '←' : '→';
+            }
+            document.body.classList.add('nav-cursor-active');
+        } else {
+            document.body.classList.remove('nav-cursor-active');
+        }
+    });
+}
+
         // Délégation pour le survol des projets (gère aussi les clones)
-        document.addEventListener('mouseover', (e) => {
-            const item = e.target.closest('.project-item');
-            if (item && cursor) {
-                cursor.textContent = item.getAttribute('data-title');
-                cursor.classList.add('active');
-            }
-        });
-        document.addEventListener('mouseout', (e) => {
-            const item = e.target.closest('.project-item');
-            if (item && cursor) {
-                cursor.textContent = '';
-                cursor.classList.remove('active');
-            }
-        });
+      document.addEventListener('mouseover', (e) => {
+    const item = e.target.closest('.project-item');
+
+    if (item && cursor) {
+
+        const isDesktop = window.innerWidth >= 1025;
+        const isIndex = !document.body.classList.contains('is-gallery') &&
+                        !document.body.classList.contains('is-info');
+
+        if (isDesktop && isIndex) {
+            return;
+        }
+
+        cursor.textContent = item.getAttribute('data-title');
+        cursor.classList.add('active');
+    }
+});
+       document.addEventListener('mouseout', (e) => {
+    const item = e.target.closest('.project-item');
+
+    if (item && cursor) {
+
+        const isDesktop = window.innerWidth >= 1025;
+        const isIndex = !document.body.classList.contains('is-gallery') &&
+                        !document.body.classList.contains('is-info');
+
+        if (isDesktop && isIndex) {
+            return;
+        }
+
+        cursor.textContent = '';
+        cursor.classList.remove('active');
+    }
+});
         // Initialisation de la bande de projets (infinie et en boucle continue)
         const strip = document.querySelector('.project-strip');
         const track = document.querySelector('.project-track');
@@ -199,6 +270,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cursor) cursor.classList.remove('project-hover');
             });
         }
+
+        // --- Navigation par clic (curseur directionnel) : fait défiler le strip ---
+        if (strip) {
+            document.addEventListener('click', (e) => {
+                if (!document.body.classList.contains('nav-cursor-active')) return;
+                if (document.body.classList.contains('project-open')) return; // géré par l'overlay projet
+                if (document.body.classList.contains('overlay-open')) return; // contact ouvert
+                if (e.target.closest('.site-header')) return;
+                if (e.target.closest('#contact-overlay')) return;
+                if (e.target.closest('.project-item')) return; // laisse le clic ouvrir le projet normalement
+
+                const goLeft = e.clientX < window.innerWidth / 2;
+                const amount = getStripJumpDistance();
+                strip.scrollBy({ left: goLeft ? -amount : amount, behavior: 'smooth' });
+                flashNavCursor(goLeft ? '«' : '»');
+            });
+        }
         // Gestion Overlay Contact centralisée
         const contactBtn = document.getElementById('contact-btn');
         const contactOverlay = document.getElementById('contact-overlay');
@@ -329,12 +417,13 @@ document.addEventListener('DOMContentLoaded', () => {
             desc_fr: 'Immersive journey created for a solidarity race in partnership with Nike Run in Paris. Art direction combining installation, photography, and large-format printing at Place de la République. Mar.2025',
             desc_en: 'Immersive journey created for a solidarity race in partnership with Nike Run in Paris. Art direction combining installation, photography, and large-format printing at Place de la République. Mar.2025',
             assets: [
-                'projets/sinequanon/visuel_03.webp',
-                'projets/sinequanon/visuel_01.gif',
+                'projets/sinequanon/visuel_05.webp',
+                'projets/sinequanon/visuel_07.webp',
                 'projets/sinequanon/visuel_02.webp',
                 'projets/sinequanon/visuel_04.webp',
-                'projets/sinequanon/visuel_05.webp',
-                'projets/sinequanon/visuel_06.webp'
+                'projets/sinequanon/visuel_01.gif',
+                'projets/sinequanon/visuel_06.webp',
+                'projets/sinequanon/visuel_03.webp'
             ]
         },
         memoire: {
@@ -405,8 +494,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/adsb/adsb03.webp',
                 'projets/adsb/adsb04.webp',
                 'projets/adsb/adsb05.webp',
-                'projets/adsb/adsb06.webp',
                 'projets/adsb/adsb07.webp',
+                'projets/adsb/adsb06.webp',
                 'projets/adsb/adsb08.webp',
                 'projets/adsb/adsb09.mp4',
                 'projets/adsb/adsb10.webp'
@@ -440,11 +529,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const overlay = document.getElementById('project-overlay');
+   const overlay = document.getElementById('project-overlay');
     const titleEl = overlay ? overlay.querySelector('.project-title') : null;
     const descEl = overlay ? overlay.querySelector('.project-description') : null;
     const galleryEl = overlay ? overlay.querySelector('.project-gallery-layer') : null;
     const closeBtn = overlay ? overlay.querySelector('.project-close-btn') : null;
+
+    // Molette verticale -> scroll horizontal dans la galerie du projet (Desktop)
+    if (galleryEl) {
+        galleryEl.addEventListener('wheel', (e) => {
+            if (window.innerWidth <= 1024) return;
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                e.preventDefault();
+                galleryEl.scrollLeft += e.deltaY;
+            }
+        }, { passive: false });
+    }
     const langBtn = overlay ? overlay.querySelector('.project-lang-toggle') : null;
     const textLayer = overlay ? overlay.querySelector('.project-text-layer') : null;
     
@@ -530,30 +630,13 @@ preventWidows(descEl);
                     element.className = 'project-gallery-img';
                 }
 
-                // Interaction dynamique pour les GIFs liés à une vidéo
+                // GIF déclenchant une vidéo : clic pour l'ouvrir, plus de hover PLAY,
+                // et le clic ne doit pas fermer l'overlay ni déclencher la navigation
                 if (isGifTrigger) {
-                    element.style.cursor = 'none'; 
-
-                    // Clic pour ouvrir la vidéo
-                    element.addEventListener('click', () => {
+                    element.addEventListener('click', (e) => {
+                        e.stopPropagation();
                         if (data.video) {
                             openVideoPlayer(data.video);
-                        }
-                    });
-
-                    // Hover PLAY
-                    element.addEventListener('mouseenter', () => {
-                        const cursor = document.querySelector('.cursor-follower');
-                        if (cursor) {
-                            cursor.textContent = 'PLAY';
-                            cursor.classList.add('active', 'play-mode');
-                        }
-                    });
-                    element.addEventListener('mouseleave', () => {
-                        const cursor = document.querySelector('.cursor-follower');
-                        if (cursor) {
-                            cursor.textContent = '';
-                            cursor.classList.remove('active', 'play-mode');
                         }
                     });
                 }
@@ -625,13 +708,27 @@ preventWidows(descEl);
         }
     });
 
-    // Fermer le projet au clic n'importe où sur l'overlay (Desktop uniquement)
+    // Clic sur l'overlay projet (Desktop uniquement) :
+    // - clic dans le bloc texte → ignoré
+    // - clic sur une vidéo → ignoré (contrôles natifs : play/pause/son/plein écran)
+    // - clic sur un bouton close → son propre gestionnaire ferme le projet
+    // - curseur directionnel actif → on fait défiler la galerie au lieu de fermer
+    // - sinon → comportement original : fermeture du projet
     if (overlay) {
         overlay.addEventListener('click', (e) => {
             if (window.innerWidth <= 1024) return;
 
-            // Si le clic est dans le bloc texte (ou ses enfants), on ne ferme pas
             if (e.target.closest('.project-text-layer')) return;
+            if (e.target.closest('video')) return;
+            if (e.target.closest('.project-close-btn')) return;
+
+            if (document.body.classList.contains('nav-cursor-active') && galleryEl) {
+                const goLeft = e.clientX < window.innerWidth / 2;
+                const amount = getGalleryJumpDistance(galleryEl);
+                galleryEl.scrollBy({ left: goLeft ? -amount : amount, behavior: 'smooth' });
+                flashNavCursor(goLeft ? '«' : '»');
+                return;
+            }
 
             closeProject();
         });

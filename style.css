@@ -562,6 +562,51 @@ body.is-info .cursor-follower {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+/* =========================================
+   CURSEUR FLÈCHE — DESKTOP INDEX + PROJETS
+   ========================================= */
+
+@media (min-width: 1025px) {
+
+    /* La flèche n'existe visuellement que
+       sur l'index et lorsqu'un projet est ouvert */
+    body:not(.is-gallery):not(.is-info):not(.overlay-open) .cursor-follower {
+        width: auto;
+        height: auto;
+        border-radius: 0;
+        color: var(--text-color);
+        font-size: 22px;
+        line-height: 1;
+        font-family: Arial, sans-serif;
+        transition: transform 0.15s ease, color 0.2s ease;
+    }
+
+    /* On neutralise les anciens états du curseur
+       pour conserver la forme de flèche */
+    body:not(.is-gallery):not(.is-info) .cursor-follower.active {
+        width: auto;
+        height: auto;
+        padding: 0;
+        border-radius: 0;
+        background: transparent !important;
+        font-size: 22px;
+    }
+
+    body:not(.is-gallery):not(.is-info) .cursor-follower.project-hover {
+        background: transparent !important;
+    }
+
+    /* Pendant CONTACT : on conserve le comportement
+       existant et on désactive la nouvelle flèche */
+    body.overlay-open .cursor-follower {
+        width: 8px;
+        height: 8px;
+        background-color: var(--text-color) !important;
+        font-size: 0;
+        padding: 0;
+        mix-blend-mode: normal;
+    }
+}
 
 .cursor-follower.project-hover {
    mix-blend-mode: difference;
@@ -583,6 +628,47 @@ body.is-info .cursor-follower {
     border: 1px solid currentColor; /* Utilise la couleur du texte (blanc sur info, noir sur index) */
 }
 
+/* =========================================
+   NAV CURSOR — Curseur directionnel indépendant
+   Desktop uniquement : index.html + overlay projet ouvert.
+   Totalement séparé de .cursor-follower : les anciennes
+   classes .active / .nav-hover / .project-hover ne peuvent
+   plus jamais transformer la flèche en carré.
+   ========================================= */
+#nav-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    pointer-events: none;
+    display: none;
+    white-space: nowrap;
+    font-family: Arial, sans-serif;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--text-color, #ffffff);
+}
+
+/* Flash de confirmation après un clic de navigation */
+#nav-cursor.nav-cursor-confirm {
+    animation: navCursorFlash 0.28s ease;
+}
+
+@keyframes navCursorFlash {
+    0%   { opacity: 1; }
+    50%  { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+
+@media (min-width: 1025px) {
+    body.nav-cursor-active #nav-cursor {
+        display: block;
+    }
+    /* Masque l'ancien curseur pendant que le nouveau est actif */
+    body.nav-cursor-active .cursor-follower {
+        display: none !important;
+    }
+}
 /* --- Header --- */
 .site-header {
     padding: 20px 20px;
@@ -898,11 +984,11 @@ body.is-info .projects-section {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity 2.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .preloader-gif {
-    width: 300px; /* Réduit de 30% (500px -> 350px) */
+    width: 250px; /* Réduit de 30% (500px -> 350px) */
     height: auto;
     display: block;
 }
