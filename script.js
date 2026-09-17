@@ -160,20 +160,22 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('resize', () => {
                 originalWidth = track.scrollWidth / 3;
                 if (originalWidth > 0) {
-                    if (strip.scrollLeft >= originalWidth * 2 || strip.scrollLeft < originalWidth) {
-                        strip.scrollLeft = originalWidth;
-                    }
+                    strip.scrollLeft = originalWidth;
                 }
             });
 
             // 3. Gestion du rebouclage infini lors du scroll (conserve l'utilisateur dans le Set 2)
+            // Le seuil se base sur les bornes natives réelles du scroll (0 et scrollWidth - clientWidth)
+            // plutôt que sur de simples multiples de originalWidth : quand le viewport est large,
+            // ces multiples peuvent dépasser la limite de scroll réelle et devenir inatteignables,
+            // ce qui bloquait le rebouclage côté droit.
             strip.addEventListener('scroll', () => {
-                if (originalWidth > 0) {
-                    if (strip.scrollLeft >= originalWidth * 2) {
-                        strip.scrollLeft -= originalWidth;
-                    } else if (strip.scrollLeft < originalWidth) {
-                        strip.scrollLeft += originalWidth;
-                    }
+                if (originalWidth <= 0) return;
+                const maxScroll = strip.scrollWidth - strip.clientWidth;
+                if (strip.scrollLeft >= maxScroll) {
+                    strip.scrollLeft -= originalWidth;
+                } else if (strip.scrollLeft <= 0) {
+                    strip.scrollLeft += originalWidth;
                 }
             });
 
@@ -384,6 +386,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/motion%20culture/culture%20evolves_low.mp4',
                 'projets/motion%20culture/printculture.webp',
                 'projets/motion%20culture/museum.webp',
+                'projets/motion%20culture/ultuure.webp',
                 'projets/motion%20culture/ticketculture.webp'
             ]
         },

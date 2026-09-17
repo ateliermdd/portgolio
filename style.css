@@ -1,442 +1,3 @@
-/* --- CORRECTION CONTACT OVERLAY --- */
-
-#contact-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000; /* À adapter selon votre charte */
-  z-index: 9999;
-  
-  /* Centrage fluide du contenu */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  /* Padding proportionnel au viewport pour éviter les bords collés */
-  padding: clamp(1.5rem, 8vw, 6rem);
-  box-sizing: border-box;
-  
-  /* Gestion de l'affichage */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
-}
-
-#contact-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.overlay-content {
-  width: 100%;
-  max-width: 1600px; /* Limite sur écrans ultra-larges */
-  margin: 0 auto;
-}
-
-.contact-details {
-  display: flex;
-  /* Disposition verticale stable pour tous les viewports non-desktop */
-  flex-direction: column;
-  align-items: flex-start;
-  
-  /* Gap fluide : s'adapte à la hauteur disponible sans calculs fixes */
-  gap: clamp(1.5rem, 5vh, 4rem);
-}
-
-.contact-item {
-  color: #fff;
-  text-decoration: none;
-  line-height: 1.1;
-  font-weight: 500;
-  
-  /* Taille de texte ultra-adaptative */
-  /* Min: 1.5rem, Idéal: 7vw, Max: 5rem */
-  font-size: clamp(1.5rem, 7vw, 5rem);
-  
-  /* Sécurité anti-débordement pour les emails longs sur écrans très étroits */
-  word-break: break-word;
-  max-width: 100%;
-  
-  transition: opacity 0.3s ease;
-}
-
-.contact-item:hover {
-  opacity: 0.5;
-}
-
-/* --- RÉTABLISSEMENT DESKTOP --- */
-/* On ne repasse en horizontal que lorsque l'espace est amplement suffisant (Desktop) */
-@media (min-width: 1024px) {
-  .contact-details {
-    /* Si vous souhaitez conserver l'alignement horizontal sur Desktop sans régression */
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .contact-item {
-    /* Ajustement de la taille pour le format horizontal */
-    font-size: clamp(1.2rem, 3vw, 2.5rem);
-    max-width: auto;
-  }
-}
-/* --- CORRECTION CONTACT OVERLAY --- */
-
-#contact-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000; /* À adapter selon votre charte */
-  z-index: 9999;
-  
-  /* Centrage fluide du contenu */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  /* Padding proportionnel au viewport pour éviter les bords collés */
-  padding: clamp(1.5rem, 8vw, 6rem);
-  box-sizing: border-box;
-  
-  /* Gestion de l'affichage */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
-}
-
-#contact-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.overlay-content {
-  width: 100%;
-  max-width: 1600px; /* Limite sur écrans ultra-larges */
-  margin: 0 auto;
-}
-
-.contact-details {
-  display: flex;
-  /* Disposition verticale stable pour tous les viewports non-desktop */
-  flex-direction: column;
-  align-items: flex-start;
-  
-  /* Gap fluide : s'adapte à la hauteur disponible sans calculs fixes */
-  gap: clamp(1.5rem, 5vh, 4rem);
-}
-
-.contact-item {
-  color: #fff;
-  text-decoration: none;
-  line-height: 1.1;
-  font-weight: 500;
-  
-  /* Taille de texte ultra-adaptative */
-  /* Min: 1.5rem, Idéal: 7vw, Max: 5rem */
-  font-size: clamp(1.5rem, 7vw, 5rem);
-  
-  /* Sécurité anti-débordement pour les emails longs sur écrans très étroits */
-  word-break: break-word;
-  max-width: 100%;
-  
-  transition: opacity 0.3s ease;
-}
-
-.contact-item:hover {
-  opacity: 0.5;
-}
-
-/* --- RÉTABLISSEMENT DESKTOP --- */
-/* On ne repasse en horizontal que lorsque l'espace est amplement suffisant (Desktop) */
-@media (min-width: 1024px) {
-  .contact-details {
-    /* Si vous souhaitez conserver l'alignement horizontal sur Desktop sans régression */
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .contact-item {
-    /* Ajustement de la taille pour le format horizontal */
-    font-size: clamp(1.2rem, 3vw, 2.5rem);
-    max-width: auto;
-  }
-}
-/* --- CORRECTION CONTACT OVERLAY --- */
-
-#contact-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000; /* À adapter selon votre charte */
-  z-index: 9999;
-  
-  /* Centrage fluide du contenu */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  /* Padding proportionnel au viewport pour éviter les bords collés */
-  padding: clamp(1.5rem, 8vw, 6rem);
-  box-sizing: border-box;
-  
-  /* Gestion de l'affichage */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
-}
-
-#contact-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.overlay-content {
-  width: 100%;
-  max-width: 1600px; /* Limite sur écrans ultra-larges */
-  margin: 0 auto;
-}
-
-.contact-details {
-  display: flex;
-  /* Disposition verticale stable pour tous les viewports non-desktop */
-  flex-direction: column;
-  align-items: flex-start;
-  
-  /* Gap fluide : s'adapte à la hauteur disponible sans calculs fixes */
-  gap: clamp(1.5rem, 5vh, 4rem);
-}
-
-.contact-item {
-  color: #fff;
-  text-decoration: none;
-  line-height: 1.1;
-  font-weight: 500;
-  
-  /* Taille de texte ultra-adaptative */
-  /* Min: 1.5rem, Idéal: 7vw, Max: 5rem */
-  font-size: clamp(1.5rem, 7vw, 5rem);
-  
-  /* Sécurité anti-débordement pour les emails longs sur écrans très étroits */
-  word-break: break-word;
-  max-width: 100%;
-  
-  transition: opacity 0.3s ease;
-}
-
-.contact-item:hover {
-  opacity: 0.5;
-}
-
-/* --- RÉTABLISSEMENT DESKTOP --- */
-/* On ne repasse en horizontal que lorsque l'espace est amplement suffisant (Desktop) */
-@media (min-width: 1024px) {
-  .contact-details {
-    /* Si vous souhaitez conserver l'alignement horizontal sur Desktop sans régression */
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .contact-item {
-    /* Ajustement de la taille pour le format horizontal */
-    font-size: clamp(1.2rem, 3vw, 2.5rem);
-    max-width: auto;
-  }
-}
-/* --- CORRECTION CONTACT OVERLAY --- */
-
-#contact-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000; /* À adapter selon votre charte */
-  z-index: 9999;
-  
-  /* Centrage fluide du contenu */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  /* Padding proportionnel au viewport pour éviter les bords collés */
-  padding: clamp(1.5rem, 8vw, 6rem);
-  box-sizing: border-box;
-  
-  /* Gestion de l'affichage */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
-}
-
-#contact-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.overlay-content {
-  width: 100%;
-  max-width: 1600px; /* Limite sur écrans ultra-larges */
-  margin: 0 auto;
-}
-
-.contact-details {
-  display: flex;
-  /* Disposition verticale stable pour tous les viewports non-desktop */
-  flex-direction: column;
-  align-items: flex-start;
-  
-  /* Gap fluide : s'adapte à la hauteur disponible sans calculs fixes */
-  gap: clamp(1.5rem, 5vh, 4rem);
-}
-
-.contact-item {
-  color: #fff;
-  text-decoration: none;
-  line-height: 1.1;
-  font-weight: 500;
-  
-  /* Taille de texte ultra-adaptative */
-  /* Min: 1.5rem, Idéal: 7vw, Max: 5rem */
-  font-size: clamp(1.5rem, 7vw, 5rem);
-  
-  /* Sécurité anti-débordement pour les emails longs sur écrans très étroits */
-  word-break: break-word;
-  max-width: 100%;
-  
-  transition: opacity 0.3s ease;
-}
-
-.contact-item:hover {
-  opacity: 0.5;
-}
-
-/* --- RÉTABLISSEMENT DESKTOP --- */
-/* On ne repasse en horizontal que lorsque l'espace est amplement suffisant (Desktop) */
-@media (min-width: 1024px) {
-  .contact-details {
-    /* Si vous souhaitez conserver l'alignement horizontal sur Desktop sans régression */
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .contact-item {
-    /* Ajustement de la taille pour le format horizontal */
-    font-size: clamp(1.2rem, 3vw, 2.5rem);
-    max-width: auto;
-  }
-}
-/* --- CORRECTION CONTACT OVERLAY --- */
-
-#contact-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000; /* À adapter selon votre charte */
-  z-index: 9999;
-  
-  /* Centrage fluide du contenu */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  
-  /* Padding proportionnel au viewport pour éviter les bords collés */
-  padding: clamp(1.5rem, 8vw, 6rem);
-  box-sizing: border-box;
-  
-  /* Gestion de l'affichage */
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
-}
-
-#contact-overlay.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.overlay-content {
-  width: 100%;
-  max-width: 1600px; /* Limite sur écrans ultra-larges */
-  margin: 0 auto;
-}
-
-.contact-details {
-  display: flex;
-  /* Disposition verticale stable pour tous les viewports non-desktop */
-  flex-direction: column;
-  align-items: flex-start;
-  
-  /* Gap fluide : s'adapte à la hauteur disponible sans calculs fixes */
-  gap: clamp(1.5rem, 5vh, 4rem);
-}
-
-.contact-item {
-  color: #fff;
-  text-decoration: none;
-  line-height: 1.1;
-  font-weight: 500;
-  
-  /* Taille de texte ultra-adaptative */
-  /* Min: 1.5rem, Idéal: 7vw, Max: 5rem */
-  font-size: clamp(1.5rem, 7vw, 5rem);
-  
-  /* Sécurité anti-débordement pour les emails longs sur écrans très étroits */
-  word-break: break-word;
-  max-width: 100%;
-  
-  transition: opacity 0.3s ease;
-}
-
-.contact-item:hover {
-  opacity: 0.5;
-}
-
-/* --- RÉTABLISSEMENT DESKTOP --- */
-/* On ne repasse en horizontal que lorsque l'espace est amplement suffisant (Desktop) */
-@media (min-width: 1024px) {
-  .contact-details {
-    /* Si vous souhaitez conserver l'alignement horizontal sur Desktop sans régression */
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  .contact-item {
-    /* Ajustement de la taille pour le format horizontal */
-    font-size: clamp(1.2rem, 3vw, 2.5rem);
-    max-width: auto;
-  }
-}
-@font-face {
-    font-family: 'europagroshop-dembol';
-    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'europagroshop-dembol';
-    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
 @font-face {
     font-family: 'europagroshop-dembol';
     src: url('fonts/europagroshop-dembol.ttf') format('truetype');
@@ -449,13 +10,6 @@
     src: url('fonts/europagroshop-dembol.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
-}
-
-@font-face {
-    font-family: 'europagroshop-dembol';
-    src: url('fonts/europagroshop-dembol.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
 }
 
 :root {
@@ -489,6 +43,22 @@ body {
 body.preloading {
     /* Empêche le scroll pendant l'animation */
     overflow: hidden;
+}
+
+/* Bloquer le scroll du site principal quand un projet est ouvert */
+body.project-open {
+    overflow: hidden;
+}
+
+/* Masquer l'expertise-list et le strip quand un projet est ouvert */
+body.project-open .expertise-list {
+    display: none !important;
+}
+
+body.project-open .project-strip {
+    opacity: 0;
+    pointer-events: none; /* Désactive les clics sur les éléments invisibles */
+    transition: opacity 0.6s ease;
 }
 
 /* --- État INFO --- */
@@ -562,6 +132,14 @@ body.is-info .cursor-follower {
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
+
+/* Désactiver le curseur sur mobile/tablette */
+@media (max-width: 1024px) {
+    .cursor-follower {
+        display: none !important;
+    }
+}
+
 /* =========================================
    CURSEUR FLÈCHE — DESKTOP INDEX + PROJETS
    ========================================= */
@@ -859,12 +437,16 @@ body.project-open .main-logo {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 600px; /* Augmenté pour accueillir le nouveau format vertical */
+    height: 250px !important;
     overflow-x: auto; /* Active le scroll natif */
     overflow-y: hidden;
     scroll-behavior: auto; /* Important: doit être auto pour le reset invisible */
     -webkit-overflow-scrolling: touch; /* Fluidité iOS */
     z-index: 80;
+    gap: 0 !important; /* L'espacement est géré dans le track */
+    align-items: flex-end !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
     scrollbar-width: none; /* Cache la scrollbar (Firefox) */
 }
 
@@ -872,35 +454,54 @@ body.project-open .main-logo {
     display: none; /* Cache la scrollbar (Chrome/Safari) */
 }
 
-.project-strip-inner {
+.project-track {
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    gap: 15px; /* Espacement constant et élégant */
-    padding: 0 20px 20px 20px;
+    gap: 10px;
+    padding-right: 20px;
+    height: 100%;
     align-items: flex-end;
-    width: max-content;
-    /* L'animation CSS est supprimée pour laisser place au scroll natif */
+    flex-shrink: 0;
 }
-
 
 .project-item {
-    flex: 0 0 auto;
-    height: 600px; 
-    aspect-ratio: 1 / 2; /* Passage à un format plus vertical pour ne pas impacter la largeur */
     position: relative;
+    height: 180px !important; /* Hauteur de base augmentée */
+    width: auto !important;
+    flex: 0 0 auto;
+    aspect-ratio: 1 / 2; /* Passage à un format plus vertical pour ne pas impacter la largeur */
     overflow: hidden;
     border-radius: 0; /* Bords droits et non arrondis */
+    transform: none !important; /* Suppression scale */
     opacity: 1; /* Opacité à 100% */
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, filter 0.4s ease;
-    will-change: transform; /* Optimisation performance hover */
+    transition: height 0.45s cubic-bezier(.22, .61, .36, 1), opacity 0.4s ease;
+    z-index: 1;
 }
-@media (max-width: 768px) {
-    .project-strip, .project-item {
-        height: 70vh; /* Hauteur relative au viewport pour éviter les débordements */
+
+.project-item:hover {
+    height: 250px; /* Expansion verticale maximale au hover */
+    z-index: 10;
+}
+
+/* Au survol du strip : l'image survolée reste nette, les autres s'estompent */
+@media (hover: hover) and (pointer: fine) {
+    .project-track:hover .project-item {
+        opacity: 0.25;
     }
+
+    .project-track:hover .project-item:hover {
+        opacity: 1;
+    }
+}
+
+.project-item img,
+.project-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media (max-width: 768px) {
     .project-item {
-        filter: none; /* Désactive les filtres gourmands sur mobile pour garantir la fluidité */
         opacity: 0.9;
     }
 }
@@ -961,12 +562,6 @@ body.overlay-open #project-overlay {
     transition: opacity 0.4s ease;
 }
 
-
-.project-item:hover {
-    transform: scale(1.02); /* Un scale est plus "premium" et moins risqué qu'un translateY */
-    opacity: 1;
-    filter: grayscale(0%) contrast(1);
-}
 
 body.is-info .projects-section {
     display: none;
@@ -1263,12 +858,14 @@ body.show-more-info div.col-clients.togglable-content {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(255, 255, 255);
-    z-index: 3000; /* Au-dessus du contenu, sous le header */
+    background-color: #ffffff;
+    z-index: 3000;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    cursor: zoom-out;
+    padding: clamp(1.5rem, 8vw, 6rem);
+    box-sizing: border-box;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
@@ -1282,53 +879,53 @@ body.show-more-info div.col-clients.togglable-content {
 .overlay-content {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centre les blocs verticalement */
-    color: white;
-    gap: 20px; /* Espacement entre la tagline et les détails */
-}
-
-.contact-tagline {
-    font-family: 'europagroshop-dembol', serif;
-    font-size: 1.1rem; 
-    color: white;
-    text-decoration: none;
-    margin: 0; /* Supprime les marges par défaut */
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .contact-details {
     display: flex;
-    justify-content: center; /* Centre les éléments horizontalement */
+    flex-wrap: nowrap;
+    justify-content: center;
     align-items: center;
-    flex-wrap: nowrap; /* Force une seule ligne sur desktop */
-    gap: 30px; /* Espacement plus large pour la clarté */
+    gap: 30px;
+}
 
-    /* Ajustement responsive pour l'espacement vertical */
-    @media (max-width: 768px) {
+@media (max-width: 1023px) {
+    .contact-details {
         flex-direction: column;
-        gap: 10px; /* Réduit l'espace entre les blocs de contact */
-        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-details {
+        gap: 10px;
     }
 }
 
 .contact-item {
     font-family: 'europagroshop-dembol', serif;
     font-size: 1.1rem;
-    color: rgb(0, 0, 0);
-    text-decoration: none; /* Supprime le soulignement par défaut */
-    white-space: nowrap; /* Empêche les éléments de se couper */
+    color: #000000;
+    text-decoration: none;
+    white-space: nowrap;
     line-height: 1.1;
+    word-break: break-word;
+    max-width: 100%;
+    transition: opacity 0.3s ease;
+}
 
-    /* Réduction de l'interlignage en responsive */
-    @media (max-width: 768px) {
-        line-height: 0.9; 
+@media (max-width: 768px) {
+    .contact-item {
+        line-height: 0.9;
     }
 }
 
-.contact-phone {
-}
-
-.contact-email {
-    /* Pas de styles spécifiques ici, hérite de .contact-item */
+.contact-item:hover {
+    opacity: 0.5;
 }
 
 .contact-email:hover,
@@ -1337,12 +934,7 @@ body.show-more-info div.col-clients.togglable-content {
 .contact-linkedin:hover {
     font-family: 'europagroshop-dembol', serif;
     font-style: italic;
-    text-decoration: none; /* Pas de soulignement au survol */
-}
-
-.contact-linkedin {
-    /* Conserve le soulignement par défaut pour LinkedIn si souhaité,
-       sinon, il hérite de text-decoration: none de .contact-item */
+    text-decoration: none;
 }
 
 /* États lors de l'ouverture de l'overlay */
@@ -1390,39 +982,77 @@ body.overlay-open .nav-right a[href*="info.html"] {
     visibility: visible;
 }
 
+/* --- Mobile / tablette (≤1024px) --- */
+@media (max-width: 1024px) {
+    #project-overlay {
+        display: block;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 768px) {
+    .project-gallery-img {
+        width: 100%;
+        height: auto;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+}
+
 /* --- Couche 1 : Texte Fixe (Au-dessus) --- */
 .project-text-layer {
-    position: fixed;
-    top: 50%;
-    left: 20px; /* Aligné sur la colonne GALLERY (padding header) */
-    transform: translateY(-50%);
     width: 220px;
-    z-index: 5000; /* PASSE AU-DESSUS DU HEADER (4000) pour garantir le clic */
     color: #1b110a;
-    pointer-events: auto; /* Zone protégée : les clics ici ne ferment pas le projet */
     isolation: isolate; /* Protège le contexte de rendu pour le bouton FR/EN */
+    z-index: 800;
+    background: transparent;
+    pointer-events: none; /* Permet de cliquer à travers les zones vides */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
 }
 
-.project-text-layer > * {
+@media (min-width: 1025px) {
+    .project-text-layer {
+        position: fixed;
+        top: 50%;
+        left: 5vw;
+        transform: translateY(-50%);
+    }
 }
 
-.project-title {
+@media (max-width: 1024px) {
+    .project-text-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: none;
+        width: 100%;
+        padding: 140px 20px 20px 20px; /* Remonté pour être plus haut sur la page */
+    }
+}
+
+.project-title,
+.project-description,
+.project-close-btn {
     font-family: 'europagroshop-dembol', serif;
-    font-size: 24px; /* Ajustable selon besoin */
-    text-transform: uppercase;
     line-height: 1.3;
-    margin-bottom: 20px;
+    max-width: 220px;
+    font-size: 10px;
+    font-weight: normal;
+    text-transform: none;
+    letter-spacing: normal;
+    color: black; /* Couleur de base pour que 'difference' fonctionne */
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    text-align: left;
+    pointer-events: auto; /* Réactive les clics sur le texte */
 }
 
-.project-description {
-    font-family: 'europagroshop-dembol', normal;
-    font-size: 10px !important;
-    letter-spacing: 0.08em !important;
-    line-height: 1.3;
-    margin-bottom: 30px;
-    color: #1b110a;
-    text-transform: none !important;
-}
 .project-lang-toggle {
     background: none;
     border: none;
@@ -1440,7 +1070,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
     vertical-align: baseline;
     position: relative;
     z-index: 5001;
-    pointer-events: auto !important; /* Force la cliquabilité */
+    pointer-events: auto;
     cursor: none;
 }
 
@@ -1449,35 +1079,90 @@ body.overlay-open .nav-right a[href*="info.html"] {
     font-style: italic;
 }
 
+/* Bouton CLOSE unique (défilant à la fin du projet) */
+.project-close-btn-bottom {
+    display: block;
+    margin: 60px auto; /* Espacement généreux pour mobile */
+    width: 100%;
+    text-align: center;
+    max-width: none;
+    cursor: pointer;
+    color: black;
+    mix-blend-mode: normal;
+}
+
+@media (min-width: 1025px) {
+    .project-close-btn-bottom {
+        width: auto;
+        margin: 0 100px 0 50px;
+        align-self: center; /* Centrage vertical dans le scroll horizontal desktop */
+        text-align: center;
+    }
+}
+
 /* --- Couche 2 : Galerie Images (Derrière) --- */
 .project-gallery-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 91;
-    display: flex;
-    align-items: center; /* Centrage vertical des images */
-    align-items: flex-end; /* Aligne les images vers le bas */
+    z-index: 910;
+    pointer-events: auto;
+    padding-top: 10vh; /* Espace pour que le haut de l'image soit dans la zone de flou */
     overflow-x: auto; /* Scroll horizontal natif */
     overflow-y: hidden;
-    padding-left: 300px; /* Espace pour ne pas cacher la première image sous le texte */
+    padding-left: 350px; /* Espace pour le texte à gauche */
     padding-right: 100px;
-    gap: 40px;
-    /* Masquer scrollbar */
+    box-sizing: border-box;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    gap: 8px; /* Espacement réduit entre les images */
+}
+
+@media (min-width: 1025px) {
+    .project-gallery-layer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center; /* Recentrage vertical des images */
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 1024px) {
+    .project-gallery-layer {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 80px;
+    }
+}
+
+/* En dessous de 768px, la galerie passe sous le bloc texte (voir .project-text-layer) */
+@media (max-width: 768px) {
+    .project-gallery-layer {
+        flex-direction: column;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scroll vertical */
+        padding: 320px 20px 50px 20px; /* Augmenté pour commencer SOUS le bloc texte */
+        align-items: center;
+        gap: 10px; /* Espacement réduit sur mobile */
+    }
 }
 
 .project-gallery-layer::-webkit-scrollbar {
     display: none;
 }
 
-
 .project-gallery-img {
-    height: 60vh; /* Hauteur fixe, largeur auto */
+    height: 65vh; /* Hauteur fixe, largeur auto */
     width: auto;
+    flex-shrink: 0;
+    margin-right: 0;
     object-fit: cover;
 }
 
@@ -1499,6 +1184,46 @@ body.overlay-open .nav-right a[href*="info.html"] {
     display: flex;
 }
 
+#fullscreen-video {
+    max-width: 100%;
+    max-height: 100vh;
+    width: auto;
+    height: auto;
+    outline: none;
+}
+
+#video-close-btn {
+    position: fixed;
+    top: 35px; /* Ajusté pour s'aligner avec la nav */
+    right: 40px; /* Ajusté pour s'aligner avec Contact */
+    z-index: 5001;
+    color: white;
+    mix-blend-mode: difference;
+    cursor: pointer;
+    font-family: 'europagroshop-dembol', sans-serif;
+    font-size: clamp(8px, 1.1vw, var(--text-size));
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    background: transparent;
+    border: none;
+}
+
+/* Style du badge PLAY sur le curseur */
+.cursor-follower.play-mode {
+    background: black !important;
+    color: white !important;
+    padding: 4px 12px !important;
+    border-radius: 0 !important;
+    font-family: 'europagroshop-dembol', sans-serif !important;
+    font-size: clamp(8px, 1.1vw, var(--text-size)) !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.2em !important;
+    height: auto !important;
+    width: auto !important;
+    white-space: nowrap;
+    mix-blend-mode: normal !important;
+}
 
 /* --- MOBILE BREAK FIX --- */
 @media (max-width: 768px) {
@@ -1521,59 +1246,9 @@ body.overlay-open .nav-right a[href*="info.html"] {
     pointer-events: none;
     transform: translateZ(0);
     display: block; /* S'assure qu'il est visible sur desktop */
-    top: 0px; /* Positionné directement sous le header */
     backdrop-filter: blur(8px); /* Intensité de flou de la 3ème bande en partant du bas */
     -webkit-backdrop-filter: blur(8px);
     /* Masque pour estomper la vitre en bas, créant une transition douce */
     mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
-}
-
-/* --- Responsive Mobile --- */
-@media (max-width: 1024px) {
-     #project-overlay {
-        display: block;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    .project-text-layer {
-        position: fixed; /* Le bloc texte devient fixe en haut de l'écran */
-        inset: auto;
-        top: 0;
-        left: 0;
-        transform: none;
-        width: 100%;
-        padding: 140px 20px 20px 20px; /* Remonté pour être plus haut sur la page */
-        z-index: 5000; /* Passe aussi au-dessus du header sur mobile */
-        display: block;
-        pointer-events: auto;
-        background-color: transparent; /* S'assure que le fond est transparent */
-    }
-
-    .project-title,
-    .project-description {
-        max-width: 100%;
-    }
-    .project-gallery-layer {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: auto;
-        z-index: 90; /* Positionné sous la lentille de flou */
-        /* Ajustement du padding-top pour laisser de l'espace sous le bloc texte fixe */
-        padding: 200px 20px 80px 20px; /* Marge généreuse pour que les images commencent sous le texte */
-        flex-direction: column;
-        overflow: visible; /* Let #project-overlay handle the scroll */
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .project-gallery-img {
-        width: 100%;
-        height: auto;
-          object-fit: contain;
-    }
-
 }
