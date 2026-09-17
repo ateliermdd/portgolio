@@ -1,6 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
 
+    // --- Curseur directionnel : état + utilitaires ---
+    // Déclarés ici (portée commune) car utilisés à la fois par initPage() (survol/clic
+    // sur le strip) et par le gestionnaire de clic de l'overlay projet, plus bas, qui
+    // navigue lui aussi via ce curseur directionnel.
+    const navCursor = document.getElementById('nav-cursor');
+    let navCursorLockUntil = 0;
+
+    function flashNavCursor(symbol) {
+        if (!navCursor) return;
+        navCursor.textContent = symbol;
+        navCursor.classList.remove('nav-cursor-confirm');
+        void navCursor.offsetWidth; // relance l'animation CSS
+        navCursor.classList.add('nav-cursor-confirm');
+        navCursorLockUntil = performance.now() + 260;
+    }
+
+    function getGalleryJumpDistance(el) {
+        const item = el ? el.querySelector('.project-gallery-img') : null;
+        if (item) {
+            const rect = item.getBoundingClientRect();
+            return rect.width * 2.2 + 16; // ~2-3 images
+        }
+        return window.innerWidth * 0.45;
+    }
+
     // Check if the preloader has already been shown in this session
     if (sessionStorage.getItem('preloaderShown')) {
         if (preloader) {
@@ -37,21 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     function initPage() {
         const cursor = document.querySelector('.cursor-follower');
-        const navCursor = document.getElementById('nav-cursor');
         const navItems = document.querySelectorAll('.nav-item');
         let isNavHover = false;
-
-        // --- Curseur directionnel : état + utilitaires ---
-        let navCursorLockUntil = 0;
-
-        function flashNavCursor(symbol) {
-            if (!navCursor) return;
-            navCursor.textContent = symbol;
-            navCursor.classList.remove('nav-cursor-confirm');
-            void navCursor.offsetWidth; // relance l'animation CSS
-            navCursor.classList.add('nav-cursor-confirm');
-            navCursorLockUntil = performance.now() + 260;
-        }
 
         function getStripJumpDistance() {
             const item = strip ? strip.querySelector('.project-item') : null;
@@ -60,15 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 return rect.width * 2.5 + 20; // ~2-3 vignettes
             }
             return window.innerWidth * 0.35;
-        }
-
-        function getGalleryJumpDistance(el) {
-            const item = el ? el.querySelector('.project-gallery-img') : null;
-            if (item) {
-                const rect = item.getBoundingClientRect();
-                return rect.width * 2.2 + 16; // ~2-3 images
-            }
-            return window.innerWidth * 0.45;
         }
 
        if (window.matchMedia("(pointer: fine)").matches) {
