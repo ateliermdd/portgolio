@@ -991,15 +991,6 @@ body.overlay-open .nav-right a[href*="info.html"] {
     }
 }
 
-@media (max-width: 768px) {
-    .project-gallery-img {
-        width: 100%;
-        height: 50vh; /* Hauteur fixe pour que object-fit: cover puisse recadrer (height:auto en empêchait tout recadrage) */
-        margin-right: 0;
-        margin-bottom: 0;
-    }
-}
-
 /* --- Couche 1 : Texte Fixe (Au-dessus) --- */
 .project-text-layer {
     width: 220px;
@@ -1138,6 +1129,9 @@ body.overlay-open .nav-right a[href*="info.html"] {
         height: auto;
         flex-direction: column;
         align-items: flex-start;
+        padding-top: 250px; /* Espace sous le bloc texte, devenu un bandeau plein largeur */
+        padding-left: 20px;
+        padding-right: 20px;
         padding-bottom: 80px;
     }
 }
@@ -1164,6 +1158,18 @@ body.overlay-open .nav-right a[href*="info.html"] {
     flex-shrink: 0;
     margin-right: 0;
     object-fit: cover;
+}
+
+/* En dessous de 1024px : chaque image garde son format d'origine (pas de recadrage),
+   pleine largeur, alignée et espacée de façon homogène avec les autres */
+@media (max-width: 1024px) {
+    .project-gallery-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        margin-right: 0;
+        margin-bottom: 0;
+    }
 }
 
 /* --- VIDEO PLAYER OVERLAY --- */
