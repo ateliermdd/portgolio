@@ -994,7 +994,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
 @media (max-width: 768px) {
     .project-gallery-img {
         width: 100%;
-        height: auto;
+        height: 50vh; /* Hauteur fixe pour que object-fit: cover puisse recadrer (height:auto en empêchait tout recadrage) */
         margin-right: 0;
         margin-bottom: 0;
     }
