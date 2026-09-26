@@ -514,41 +514,36 @@ body.project-open .main-logo {
 
 .gallery-section {
     width: 100%;
-    padding: 160px 70px 70px 70px; /* Augmente l'espace sous le header fixe sur Desktop */
+    padding: 160px 20px 70px 20px; /* Padding latéral identique au header (20px) pour aligner la grille sur WORK / CONTACT */
 }
 
 .gallery-masonry {
-    column-count: 8;
-    column-gap: 90px;
-    max-width: 1000px;
-    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px 60px;
+    width: 100%;
+    margin: 20px auto 0;
 }
 
 .gallery-masonry img {
-    width: 60%;
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto 80px auto; /* Centre l'image dans sa colonne pour équilibrer la grille */
-    break-inside: avoid; /* Empêche l'image de se couper entre deux colonnes */
     pointer-events: auto; /* Réactive les interactions */
 }
 
 
 /* Responsive Gallery */
 @media (max-width: 1000px) {
-    .gallery-section { padding: 130px 80px 70px 80px; } /* Augmente l'espace sous le logo fixe et ajuste le centrage */
-    .gallery-masonry { 
-        column-count: 4; 
-        column-gap: 15px; /* Resserre les colonnes horizontalement */
+    .gallery-section { padding: 130px 20px 70px 20px; } /* Même padding latéral (20px) qu'en desktop */
+    .gallery-masonry {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 60px 30px;
         margin-top: 0px;   /* Supprime la marge au-dessus des images pour les remonter vers le logo */
     }
-    .gallery-masonry img:nth-child(n) { margin-top: 70px; } /* Augmente le décalage vertical aléatoire sur mobile */
-    
+
     .gallery-masonry img {
-        width: 60%; /* Réduction de 20% supplémentaire par rapport au desktop (80% -> 60%) */
-        margin-bottom: 2px; /* Augmente l'espace vertical entre les images d'une même colonne */
-        margin-left: auto;
-        margin-right: auto;
+        width: 100%;
     }
 }
 

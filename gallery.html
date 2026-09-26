@@ -19,43 +19,24 @@
             opacity: 0.8;
         }
 
-        /* NOUVEL OVERLAY GALLERY */
-        #gallery-overlay {
+        /* Fondu blanc lors de la navigation vers un projet (SPA index.html) */
+        #page-fade {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.6);
-            z-index: 2000; /* Maintenu à 2000 pour que l'expertise-list (2001) soit au-dessus */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: zoom-out;
+            background: #ffffff;
+            z-index: 9999;
             opacity: 0;
-            visibility: hidden;
             pointer-events: none;
-            transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s;
+            transition: opacity 0.5s ease;
         }
 
-        #gallery-overlay.active {
+        #page-fade.active {
             opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
         }
 
-        #gallery-overlay img {
-            max-width: 90%;
-            max-height: 85vh;
-            object-fit: contain;
-            box-shadow: 0 0 40px rgba(211, 211, 211, 0.5);
-            cursor: zoom-out;
-        }
-
-        body.gallery-open {
-            overflow: hidden;
-        }
-        
         /* Désactiver le curseur sur mobile/tablette */
         @media (max-width: 1024px) {
             .cursor-follower {
@@ -71,7 +52,7 @@
     <header class="site-header">
         <nav>
             <div class="nav-left">
-                <a href="gallery.html" class="nav-item">GALLERY</a>
+                <a href="gallery.html" class="nav-item">WORK</a>
             </div>
             <div class="nav-right">
                 <a href="#" class="nav-item" id="contact-btn">CONTACT</a>
@@ -106,50 +87,26 @@
 
         <section class="gallery-section">
             <div class="gallery-masonry">
-                <!-- 18 images réparties sur 8 colonnes -->
-                <img src="projets/gallery/17.webp" alt="Gallery image 17">
-                <img src="projets/gallery/01.webp" alt="Gallery image 1">
-                <img src="projets/gallery/02.webp" alt="Gallery image 2">
-                <img src="projets/gallery/03.webp" alt="Gallery image 3">
-                <img src="projets/gallery/04.webp" alt="Gallery image 4">
-                <img src="projets/gallery/05.webp" alt="Gallery image 5">
-                <img src="projets/gallery/06.webp" alt="Gallery image 6">
-                <img src="projets/gallery/07.webp" alt="Gallery image 7">
-                <img src="projets/gallery/08.webp" alt="Gallery image 8">
-                <img src="projets/gallery/09.webp" alt="Gallery image 9">
-                <img src="projets/gallery/18.webp" alt="Gallery image 18">
-                <img src="projets/gallery/10.webp" alt="Gallery image 10">
-                <img src="projets/gallery/11.webp" alt="Gallery image 11">
-                <img src="projets/gallery/12.webp" alt="Gallery image 12">
-                <img src="projets/gallery/13.webp" alt="Gallery image 13">
-                <img src="projets/gallery/14.webp" alt="Gallery image 14">
-                <img src="projets/gallery/15.webp" alt="Gallery image 15">
-                <img src="projets/gallery/16.webp" alt="Gallery image 16">
-                <img src="projets/gallery/19.webp" alt="Gallery image 19">
-                <img src="projets/gallery/20.webp" alt="Gallery image 20">
-                <img src="projets/gallery/21.webp" alt="Gallery image 21">
-                <img src="projets/gallery/22.webp" alt="Gallery image 22">
-                <img src="projets/gallery/23.webp" alt="Gallery image 23">
-                <img src="projets/gallery/24.webp" alt="Gallery image 24">
-                <img src="projets/gallery/25.webp" alt="Gallery image 25">
-                <img src="projets/gallery/26.webp" alt="Gallery image 26">
-                <img src="projets/gallery/27.webp" alt="Gallery image 27">
-                <img src="projets/gallery/28.webp" alt="Gallery image 28">
-                <img src="projets/gallery/29.webp" alt="Gallery image 29">
-                <img src="projets/gallery/30.webp" alt="Gallery image 30">
-                <img src="projets/gallery/31.webp" alt="Gallery image 31">
-                <img src="projets/gallery/32.webp" alt="Gallery image 32">
-
-
+                <!-- Une image par projet : le clic ouvre le projet correspondant dans la SPA (index.html) -->
+                <img src="projets/gallery/work/visuel_02.webp" alt="Tha" data-project="tha">
+                <img src="projets/gallery/work/adsb01.webp" alt="Andersson Bell" data-project="andersson_bell">
+                <img src="projets/gallery/work/visuel_10.webp" alt="Créolisation" data-project="creolisation">
+                <img src="projets/gallery/work/ultuure.webp" alt="The Culture Evolves" data-project="the_culture_evolves">
+                <img src="projets/gallery/work/street04.webp" alt="Osaka" data-project="osaka">
+                <img src="projets/gallery/work/keblack_post_0-07.webp" alt="Keblack" data-project="keblack">
+                <img src="projets/gallery/work/memoire_post_05.webp" alt="Mémoire" data-project="memoire">
+                <img src="projets/gallery/work/madamemo_poster.webp" alt="MadameMo" data-project="madamemo">
+                <img src="projets/gallery/work/05.webp" alt="Posters" data-project="posters">
+                <img src="projets/gallery/work/visuel_07.webp" alt="Sinequanon" data-project="sinequanon">
+                <img src="projets/gallery/work/visuel_06.webp" alt="Sunburn" data-project="sunburn">
+                <img src="projets/gallery/work/cop1_05.webp" alt="COP1" data-project="cop1">
+                <img src="projets/gallery/work/dici_images-05.webp" alt="Agence Dici" data-project="agence_dici">
             </div>
             <footer class="site-footer">Copyright © 2026 Atelier MDD</footer>
         </section>
     </main>
 
-    <!-- NOUVEL OVERLAY POUR L'AGRANDISSEMENT -->
-    <div id="gallery-overlay">
-        <img src="" alt="Expanded view" id="gallery-full-img">
-    </div>
+    <div id="page-fade"></div>
 
     <div id="contact-overlay">
         <div class="overlay-content">
@@ -165,35 +122,19 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const galleryImages = document.querySelectorAll('.gallery-masonry img');
-            const overlay = document.getElementById('gallery-overlay');
-            const fullImg = document.getElementById('gallery-full-img');
-            
-            // Ouvrir l'overlay
-            galleryImages.forEach(img => {
+            const workImages = document.querySelectorAll('.gallery-masonry img');
+            const fade = document.getElementById('page-fade');
+
+            // Clic sur une image WORK : fondu blanc puis ouverture du projet dans la SPA (index.html)
+            workImages.forEach(img => {
                 img.addEventListener('click', () => {
-                    fullImg.src = img.src;
-                    overlay.classList.add('active');
-                    document.body.classList.add('gallery-open');
+                    const project = img.dataset.project;
+                    if (!project) return;
+                    fade.classList.add('active');
+                    setTimeout(() => {
+                        window.location.href = `index.html?project=${project}`;
+                    }, 500);
                 });
-            });
-
-            // Fonctions de fermeture
-            const closeGallery = () => {
-                overlay.classList.remove('active');
-                document.body.classList.remove('gallery-open');
-                setTimeout(() => { if(!overlay.classList.contains('active')) fullImg.src = ''; }, 300); // Nettoie la source après l'animation
-            };
-
-            overlay.addEventListener('click', () => {
-                closeGallery();
-            });
-
-            // Touche Échap
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && overlay.classList.contains('active')) {
-                    closeGallery();
-                }
             });
         });
     </script>

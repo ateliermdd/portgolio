@@ -766,4 +766,10 @@ preventWidows(descEl);
     window.addEventListener('popstate', () => {
         closeVideoPlayer();
     });
+
+    // Arrivée depuis la page WORK (index.html?project=xxx) : ouvre directement le projet correspondant
+    const urlProject = new URLSearchParams(window.location.search).get('project');
+    if (urlProject && projects[urlProject]) {
+        openProject(urlProject);
+    }
 });
