@@ -532,6 +532,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/madamemo/madamemo_poster.webp',
                 'projets/madamemo/short_film_mo.mp4'
             ]
+        },
+        posters: {
+            title: 'POSTERS',
+            desc_fr: 'Compilations of original posters, using mixed media for creative results. Production scheduled for September 2026.',
+            desc_en: 'Compilations of original posters, using mixed media for creative results. Production scheduled for September 2026.',
+            assets: [
+                'projets/posters/01.webp',
+                'projets/posters/02.webp',
+                'projets/posters/03.webp',
+                'projets/posters/04.webp',
+                'projets/posters/05.webp',
+                'projets/posters/06.webp',
+                'projets/posters/07.webp',
+                'projets/posters/08.webp',
+                'projets/posters/09.webp'
+            ]
         }
     };
 
