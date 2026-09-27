@@ -542,7 +542,7 @@ body.project-open .main-logo {
 
 .gallery-section {
     width: 100%;
-    padding: 160px 20px 70px 20px; /* Padding latéral identique au header (20px) pour aligner la grille sur WORK / CONTACT */
+    padding: 160px 20px 100vh 20px; /* Padding latéral identique au header (20px) ; padding-bas généreux pour que la dernière rangée puisse remonter entièrement derrière le header/blur */
 }
 
 .gallery-masonry {
@@ -563,7 +563,7 @@ body.project-open .main-logo {
 
 /* Responsive Gallery */
 @media (max-width: 1000px) {
-    .gallery-section { padding: 130px 20px 70px 20px; } /* Même padding latéral (20px) qu'en desktop */
+    .gallery-section { padding: 130px 20px 100vh 20px; } /* Même padding latéral (20px) qu'en desktop, padding-bas généreux (cf. règle desktop) */
     .gallery-masonry {
         grid-template-columns: repeat(2, 1fr);
         gap: 60px 30px;
@@ -1155,7 +1155,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
         padding-top: 250px; /* Espace sous le bloc texte, devenu un bandeau plein largeur */
         padding-left: 20px;
         padding-right: 20px;
-        padding-bottom: 80px;
+        padding-bottom: 100vh; /* Généreux pour que la dernière image puisse remonter entièrement derrière le header/blur */
     }
 }
 
@@ -1165,7 +1165,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
         flex-direction: column;
         overflow-x: hidden;
         overflow-y: auto; /* Scroll vertical */
-        padding: 320px 20px 50px 20px; /* Augmenté pour commencer SOUS le bloc texte */
+        padding: 320px 20px 100vh 20px; /* Augmenté pour commencer SOUS le bloc texte ; padding-bas généreux (cf. commentaire ci-dessus) */
         align-items: center;
         gap: 10px; /* Espacement réduit sur mobile */
     }
