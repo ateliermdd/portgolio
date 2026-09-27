@@ -276,6 +276,40 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
+        // --- Indice "SWIPE" (mobile uniquement) ---
+        // Apparaît 1,2s après la fin de l'intro, disparaît dès qu'un vrai swipe est détecté sur le strip,
+        // et ne réapparaît plus ensuite (mémorisé pour la session).
+        const swipeHint = document.getElementById('swipe-hint');
+        if (swipeHint && strip && window.innerWidth <= 768 && !sessionStorage.getItem('swipeHintShown')) {
+            const revealTimer = setTimeout(() => {
+                swipeHint.classList.add('visible');
+            }, 1200);
+
+            let swipeStartX = null;
+
+            const dismissSwipeHint = () => {
+                swipeHint.classList.remove('visible');
+                sessionStorage.setItem('swipeHintShown', 'true');
+                clearTimeout(revealTimer);
+                strip.removeEventListener('touchstart', onSwipeTouchStart);
+                strip.removeEventListener('touchmove', onSwipeTouchMove);
+            };
+
+            function onSwipeTouchStart(e) {
+                swipeStartX = e.touches[0].clientX;
+            }
+
+            function onSwipeTouchMove(e) {
+                if (swipeStartX === null) return;
+                if (Math.abs(e.touches[0].clientX - swipeStartX) > 15) {
+                    dismissSwipeHint();
+                }
+            }
+
+            strip.addEventListener('touchstart', onSwipeTouchStart, { passive: true });
+            strip.addEventListener('touchmove', onSwipeTouchMove, { passive: true });
+        }
+
         // --- Navigation par clic (curseur directionnel) : fait défiler le strip ---
         if (strip) {
             document.addEventListener('click', (e) => {
