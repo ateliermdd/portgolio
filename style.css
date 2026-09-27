@@ -611,12 +611,6 @@ body.is-info .projects-section {
     display: block;
 }
 
-@media (max-width: 768px) {
-    .preloader-gif {
-        width: 160px;
-    }
-}
-
 /* --- MAIN CONTAINER FOR INFO PAGE --- */
 .info-main {
     width: 100%;
@@ -1286,13 +1280,4 @@ body.overlay-open .nav-right a[href*="info.html"] {
     /* Masque pour estomper la vitre en bas, créant une transition douce */
     mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 30%, transparent 100%);
-}
-
-/* Sur index.html, le nav_blur n'est utile que pendant l'ouverture d'un projet
-   (sur WORK/INFO il reste visible en permanence, comportement inchangé) */
-body:not(.is-gallery):not(.is-info) .nav_blur {
-    display: none;
-}
-body.project-open:not(.is-gallery):not(.is-info) .nav_blur {
-    display: block;
 }
