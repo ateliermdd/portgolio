@@ -75,7 +75,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
        if (window.matchMedia("(pointer: fine)").matches) {
-    document.addEventListener('mousemove', (e) => {
+    // Les écritures DOM (transform du curseur, classe sur body) sont regroupées via
+    // requestAnimationFrame : sur un mousemove brut (potentiellement bien plus fréquent
+    // que l'affichage, notamment en glissant le strip), cela évite de solliciter le thread
+    // principal à chaque événement et de faire concurrence au rendu de la bande texte
+    // (mix-blend-mode), qui pouvait alors sauter une frame et sembler se couper.
+    let pendingMouseEvent = null;
+    let mouseFrameScheduled = false;
+
+    function applyMouseFrame() {
+        mouseFrameScheduled = false;
+        const e = pendingMouseEvent;
+        if (!e) return;
 
         let transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
 
@@ -99,6 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('nav-cursor-active');
         } else {
             document.body.classList.remove('nav-cursor-active');
+        }
+    }
+
+    document.addEventListener('mousemove', (e) => {
+        pendingMouseEvent = e;
+        if (!mouseFrameScheduled) {
+            mouseFrameScheduled = true;
+            requestAnimationFrame(applyMouseFrame);
         }
     });
 }
