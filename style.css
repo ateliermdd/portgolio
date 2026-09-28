@@ -572,7 +572,7 @@ body.project-open .main-logo {
 
 
 /* Responsive Gallery */
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
     .gallery-section { padding: 130px 20px 70px 20px; } /* Même padding latéral (20px) qu'en desktop */
     .gallery-masonry {
         grid-template-columns: repeat(2, 1fr);
@@ -722,7 +722,9 @@ body.is-info .hero {
 
 .approach-text {
     font-family: 'europagroshop-dembol', serif;
-    font-size: 12.6px; /* Réduit de 0.3pt (approx 0.4px) */
+    /* Taille fluide unique : 18px en mobile (≤375px) jusqu'à 20px en desktop (≥1025px),
+       interpolée automatiquement entre les deux (plus de valeur "coincée" sur tablette) */
+    font-size: clamp(18px, 16.8px + 0.31vw, 20px);
     line-height: 1.3;
     max-width: none;
     margin: 0;
@@ -731,18 +733,10 @@ body.is-info .hero {
 }
 
 @media (min-width: 1025px) {
-    /* Texte d'intro : taille agrandie et comportement libre, sans contrainte de largeur, sur Desktop uniquement */
+    /* Compense l'espacement au-dessus du texte pour l'aligner avec EXPERIENCES/CLIENTS/EXHIBITIONS
+       (pertinent uniquement dans la mise en page en ligne du Desktop) */
     .approach-text {
-        font-size: 20px;
-        max-width: none;
-        margin-top: -2.5px; /* Compense l'espacement au-dessus du texte pour aligner avec EXPERIENCES/CLIENTS/EXHIBITIONS */
-    }
-}
-
-@media (max-width: 768px) {
-    /* Texte d'intro : taille agrandie et comportement libre, sans retours à la ligne forcés, sur Mobile */
-    .approach-text {
-        font-size: 18px;
+        margin-top: -2.5px;
     }
 }
 
@@ -943,7 +937,7 @@ body.show-more-info div.col-clients.togglable-content {
     gap: 30px;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1024px) {
     .contact-details {
         flex-direction: column;
     }
@@ -1098,8 +1092,13 @@ body.overlay-open .nav-right a[href*="info.html"] {
 .project-description {
     font-family: 'europagroshop-dembol', serif;
     line-height: 1.3;
-    max-width: 220px; /* Comportement mobile/tablette inchangé */
-    font-size: 13px; /* +30% par rapport aux 10px d'origine */
+    /* Pas de largeur imposée : le texte utilise toute la largeur disponible de
+       .project-text-layer (déjà responsive), quel que soit l'écran. Une colonne fixe de
+       220px entrait en conflit avec la taille de police désormais plus grande sur
+       mobile/tablette et forçait un bloc de texte anormalement haut. */
+    max-width: none;
+    /* Taille fluide unique : 13px en mobile jusqu'à 20px en desktop, sans palier tablette */
+    font-size: clamp(13px, 8.96px + 1.08vw, 20px);
     font-weight: normal;
     text-transform: none;
     letter-spacing: normal;
@@ -1110,13 +1109,6 @@ body.overlay-open .nav-right a[href*="info.html"] {
     border: none;
     text-align: left;
     pointer-events: auto; /* Réactive les clics sur le texte */
-}
-
-@media (min-width: 1025px) {
-    .project-description {
-        max-width: none; /* Texte libre, sans largeur imposée, sur Desktop uniquement */
-        font-size: 20px;
-    }
 }
 
 .project-lang-toggle {
@@ -1269,7 +1261,9 @@ body.overlay-open .nav-right a[href*="info.html"] {
         height: auto;
         flex-direction: column;
         align-items: flex-start;
-        padding-top: 250px; /* Espace sous le bloc texte, devenu un bandeau plein largeur */
+        /* Espace sous le bloc texte : varie en continu selon la largeur (le texte occupe
+           plus de hauteur sur les petits écrans), plus de palier fixe entre tablette et mobile */
+        padding-top: clamp(265px, 351.78px - 8.48vw, 320px);
         padding-left: 20px;
         padding-right: 20px;
         padding-bottom: 80px;
@@ -1282,7 +1276,9 @@ body.overlay-open .nav-right a[href*="info.html"] {
         flex-direction: column;
         overflow-x: hidden;
         overflow-y: auto; /* Scroll vertical */
-        padding: 320px 20px 50px 20px; /* Augmenté pour commencer SOUS le bloc texte */
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-bottom: 50px;
         align-items: center;
         gap: 10px; /* Espacement réduit sur mobile */
     }
