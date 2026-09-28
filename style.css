@@ -607,18 +607,28 @@ body.is-info .projects-section {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #ffffff;
+    background: #ffffff; /* Fond opaque en permanence : masque le site pendant tout le chargement */
     z-index: 10000;
-    display: flex;
+    display: flex; /* Centre le logo horizontalement et verticalement */
     align-items: center;
     justify-content: center;
-    transition: opacity 2.1s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.preloader-gif {
-    width: 250px; /* Réduit de 30% (500px -> 350px) */
+.preloader-img {
+    width: 200px; /* -20% par rapport aux 250px précédents */
     height: auto;
     display: block;
+    opacity: 0; /* Point de départ du fondu d'entrée : seul le logo fait l'objet du fondu */
+    transition: opacity 1s ease; /* Durée du fondu d'entrée */
+}
+
+.preloader-img.preloader-visible {
+    opacity: 1;
+}
+
+.preloader-img.preloader-fade-out {
+    transition: opacity 1.2s ease; /* Durée du fondu de sortie */
+    opacity: 0;
 }
 
 /* --- MAIN CONTAINER FOR INFO PAGE --- */

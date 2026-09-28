@@ -35,18 +35,29 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (preloader) {
         // First visit in this session, show the preloader
         document.body.classList.add('preloading');
+        const preloaderImg = preloader.querySelector('.preloader-img');
 
-        // Affichage un peu plus long avant le début du fondu
+        const FADE_IN_MS = 1000;
+        const HOLD_MS = 3000;
+        const FADE_OUT_MS = 1200;
+
+        // Fondu d'entrée du logo depuis le blanc (le fond, lui, est opaque dès le départ et masque
+        // le site ; léger différé pour garantir que le navigateur peint bien l'état initial
+        // opacity:0 avant de démarrer la transition vers 1)
         setTimeout(() => {
-            preloader.style.opacity = '0';
+            if (preloaderImg) preloaderImg.classList.add('preloader-visible');
+        }, 20);
 
-            // Attend la fin réelle de la transition CSS (1.6s) avant de retirer l'élément
+        // Reste affiché le temps du chargement/de l'intro, puis fondu de sortie du logo vers le blanc
+        setTimeout(() => {
+            if (preloaderImg) preloaderImg.classList.add('preloader-fade-out');
+
             setTimeout(() => {
                 preloader.remove();
                 document.body.classList.remove('preloading');
                 initPage();
-            }, 1600);
-        }, 1500);
+            }, FADE_OUT_MS);
+        }, FADE_IN_MS + HOLD_MS);
 
         // Set the flag in sessionStorage so it doesn't show again
         sessionStorage.setItem('preloaderShown', 'true');
