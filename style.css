@@ -560,6 +560,16 @@ body.project-open .main-logo {
     pointer-events: auto; /* Réactive les interactions */
 }
 
+/* Sur la page WORK, le footer doit être un vrai footer de fin de page
+   (dans le flux, après les images), pas fixé à l'écran comme ailleurs */
+.gallery-section .site-footer {
+    position: static;
+    bottom: auto;
+    left: auto;
+    margin-top: 40px;
+    pointer-events: auto;
+}
+
 
 /* Responsive Gallery */
 @media (max-width: 1000px) {
