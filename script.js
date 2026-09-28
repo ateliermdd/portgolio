@@ -415,6 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // État local pour la langue du SPA
     let currentLang = 'fr';
     let currentProjectData = null;
+    let currentProjectKey = null;
 
     // --- GESTION DU PROJET OVERLAY (SPA) ---
 
@@ -668,6 +669,7 @@ function preventWidows(element) {
         const key = projectTitle ? projectTitle.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().replace(/\s+/g, '_') : 'default';
         const data = projects[key] || projects['default'];
         currentProjectData = data;
+        currentProjectKey = key;
 
         // Injecter le texte
 titleEl.textContent = data.title;
@@ -719,15 +721,52 @@ preventWidows(descEl);
                 galleryEl.appendChild(element);
             });
         }
- // Ajout du second bouton CLOSE à la fin de la galerie (flux du scroll)
+ // Ajout des boutons PREV / CLOSE / NEXT à la fin de la galerie (flux du scroll)
+        const navControls = document.createElement('div');
+        navControls.className = 'project-nav-controls';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.className = 'project-close-btn project-prev-btn';
+        prevBtn.textContent = 'PREV';
+        prevBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); navigateProject(-1); });
+
         const bottomCloseBtn = document.createElement('button');
         bottomCloseBtn.className = 'project-close-btn project-close-btn-bottom';
         bottomCloseBtn.textContent = 'CLOSE';
         bottomCloseBtn.addEventListener('click', (e) => { e.preventDefault(); closeProject(); });
-        galleryEl.appendChild(bottomCloseBtn);
+
+        const nextBtn = document.createElement('button');
+        nextBtn.className = 'project-close-btn project-next-btn';
+        nextBtn.textContent = 'NEXT';
+        nextBtn.addEventListener('click', (e) => { e.preventDefault(); e.stopPropagation(); navigateProject(1); });
+
+        navControls.appendChild(prevBtn);
+        navControls.appendChild(bottomCloseBtn);
+        navControls.appendChild(nextBtn);
+        galleryEl.appendChild(navControls);
         // Activer l'overlay et les styles globaux
         overlay.classList.add('active');
         document.body.classList.add('project-open');
+        // Repart du début du contenu à chaque (ré)ouverture, y compris lors d'un changement via PREV/NEXT
+        galleryEl.scrollLeft = 0;
+        overlay.scrollTop = 0;
+    }
+
+    // Ordre des projets = ordre des vignettes dans le strip de la homepage (source unique de vérité)
+    function getProjectOrder() {
+        const keys = Array.from(document.querySelectorAll('.project-strip .project-item[data-title]'))
+            .map(item => item.getAttribute('data-title').toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim().replace(/\s+/g, '_'));
+        return Array.from(new Set(keys)); // dédoublonne les clones du loop infini, en conservant l'ordre
+    }
+
+    // Navigation cyclique entre projets (PREV: -1, NEXT: 1)
+    function navigateProject(direction) {
+        const order = getProjectOrder();
+        if (!order.length || !currentProjectKey) return;
+        const currentIndex = order.indexOf(currentProjectKey);
+        if (currentIndex === -1) return;
+        const nextIndex = (currentIndex + direction + order.length) % order.length;
+        openProject(order[nextIndex]);
     }
 
     // --- GESTION VIDEO PLAYER ---

@@ -1124,6 +1124,71 @@ body.overlay-open .nav-right a[href*="info.html"] {
     }
 }
 
+/* Boutons PREV / NEXT encadrant CLOSE : même typographie/taille/logique responsive
+   que les boutons du header (WORK / JOIN / INFO), en gris clair uniquement */
+.project-nav-controls .project-prev-btn,
+.project-nav-controls .project-next-btn {
+    font-family: 'europagroshop-dembol', serif;
+    letter-spacing: 0.8px; /* Valeur calculée identique à celle héritée par .nav-item (0.05em du body, 16px) */
+    font-size: calc(var(--text-size) * 1.1);
+    font-weight: 500;
+    line-height: 1;
+    color: #999999;
+    background: none;
+    border: none;
+    appearance: none;
+    max-width: none;
+    text-transform: none;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+@media (max-width: 1024px) {
+    /* PREV aligné au bord gauche, CLOSE au centre, NEXT au bord droit,
+       sur la même largeur que le header (padding-left/right:20px hérité du parent) */
+    .project-nav-controls {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        width: 100%;
+    }
+    .project-nav-controls .project-prev-btn {
+        justify-self: start;
+    }
+    .project-nav-controls .project-next-btn {
+        justify-self: end;
+    }
+    .project-nav-controls .project-close-btn-bottom {
+        width: auto;
+        margin: 0;
+    }
+}
+
+@media (min-width: 1025px) {
+    /* Desktop : PREV / CLOSE / NEXT forment un véritable footer fixe en bas de l'overlay,
+       indépendant du défilement horizontal des images (typo/taille/couleur inchangées) */
+    .project-nav-controls {
+        position: fixed;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        align-items: center;
+        gap: 60px;
+        z-index: 920; /* Au-dessus des images (910) */
+    }
+    .project-nav-controls .project-prev-btn,
+    .project-nav-controls .project-next-btn {
+        margin: 0;
+    }
+    .project-nav-controls .project-close-btn-bottom {
+        margin: 0;
+    }
+}
+
 /* --- Couche 2 : Galerie Images (Derrière) --- */
 .project-gallery-layer {
     z-index: 910;
@@ -1132,7 +1197,7 @@ body.overlay-open .nav-right a[href*="info.html"] {
     overflow-x: auto; /* Scroll horizontal natif */
     overflow-y: hidden;
     padding-left: 350px; /* Espace pour le texte à gauche */
-    padding-right: 100px;
+    padding-right: 20px; /* Aligne le bord de la dernière image avec le bord droit du header (INFO) */
     box-sizing: border-box;
     scrollbar-width: none;
     -ms-overflow-style: none;
