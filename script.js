@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const preloaderImg = preloader.querySelector('.preloader-img');
 
         const FADE_IN_MS = 1000;
-        const HOLD_MS = 3000;
+        const HOLD_MS = 2800;
         const FADE_OUT_MS = 1200;
 
         // Fondu d'entrée du logo depuis le blanc (le fond, lui, est opaque dès le départ et masque
@@ -48,9 +48,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (preloaderImg) preloaderImg.classList.add('preloader-visible');
         }, 20);
 
-        // Reste affiché le temps du chargement/de l'intro, puis fondu de sortie du logo vers le blanc
+        // Reste affiché le temps du chargement/de l'intro, puis fondu de sortie en transparence
+        // (fond + logo ensemble) pour laisser apparaître le site progressivement en dessous
         setTimeout(() => {
-            if (preloaderImg) preloaderImg.classList.add('preloader-fade-out');
+            preloader.classList.add('preloader-fade-out');
 
             setTimeout(() => {
                 preloader.remove();

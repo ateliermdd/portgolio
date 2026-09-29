@@ -607,28 +607,30 @@ body.is-info .projects-section {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #ffffff; /* Fond opaque en permanence : masque le site pendant tout le chargement */
+    background: #ffffff; /* Fond opaque au départ : masque le site pendant le chargement */
     z-index: 10000;
     display: flex; /* Centre le logo horizontalement et verticalement */
     align-items: center;
     justify-content: center;
 }
 
+/* Fondu de sortie : tout le bandeau (fond + logo) s'efface en transparence pour laisser
+   apparaître le site progressivement en dessous, au lieu d'une disparition brutale */
+#preloader.preloader-fade-out {
+    transition: opacity 1.2s ease;
+    opacity: 0;
+}
+
 .preloader-img {
     width: 200px; /* -20% par rapport aux 250px précédents */
     height: auto;
     display: block;
-    opacity: 0; /* Point de départ du fondu d'entrée : seul le logo fait l'objet du fondu */
+    opacity: 0; /* Point de départ du fondu d'entrée */
     transition: opacity 1s ease; /* Durée du fondu d'entrée */
 }
 
 .preloader-img.preloader-visible {
     opacity: 1;
-}
-
-.preloader-img.preloader-fade-out {
-    transition: opacity 1.2s ease; /* Durée du fondu de sortie */
-    opacity: 0;
 }
 
 /* --- MAIN CONTAINER FOR INFO PAGE --- */
