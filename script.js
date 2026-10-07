@@ -614,6 +614,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/posters/08.webp',
                 'projets/posters/09.webp'
             ]
+        },
+        jardin_des_exilees: {
+            title: 'JARDIN DES EXILÉES',
+            desc_fr: 'Fashion editorial inspired by the Pre-Raphaelites, placing a Rif woman at the heart of a romantic, ethereal world, displaced from its original era into the present. A meeting of heritage and exile, reimagining the place of women within artistic imaginaries.',
+            desc_en: 'Fashion editorial inspired by the Pre-Raphaelites, placing a Rif woman at the heart of a romantic, ethereal world, displaced from its original era into the present. A meeting of heritage and exile, reimagining the place of women within artistic imaginaries.',
+            assets: [
+                'projets/jardin/jardin_1.webp',
+                'projets/jardin/jardin_2.webp',
+                'projets/jardin/jardin_3.webp',
+                'projets/jardin/jardin_4.webp',
+                'projets/jardin/jardin_5.webp',
+                'projets/jardin/jardin_6.webp',
+                'projets/jardin/jardin_7.webp',
+                'projets/jardin/jardin_8.webp',
+                'projets/jardin/jardin_9.webp'
+            ]
         }
     };
 
