@@ -621,13 +621,9 @@ document.addEventListener('DOMContentLoaded', () => {
             desc_en: 'Fashion editorial inspired by the Pre-Raphaelites, placing a Rif woman at the heart of a romantic, ethereal world, displaced from its original era into the present. A meeting of heritage and exile, reimagining the place of women within artistic imaginaries.',
             assets: [
                 'projets/jardin/jardin_1.webp',
-                'projets/jardin/jardin_2.webp',
-                'projets/jardin/jardin_3.webp',
-                'projets/jardin/jardin_4.webp',
                 'projets/jardin/jardin_5.webp',
                 'projets/jardin/jardin_6.webp',
                 'projets/jardin/jardin_7.webp',
-                'projets/jardin/jardin_8.webp',
                 'projets/jardin/jardin_8bis.webp',
                 'projets/jardin/jardin_9.webp'
             ]
