@@ -623,6 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 'projets/jardin/jardin_1.webp',
                 'projets/jardin/jardin_5.webp',
                 'projets/jardin/jardin_6.webp',
+                'projets/jardin/jardin_11.webp',
                 'projets/jardin/jardin_7.webp',
                 'projets/jardin/jardin_8bis.webp',
                 'projets/jardin/jardin_9.webp'
