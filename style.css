@@ -560,6 +560,59 @@ body.project-open .main-logo {
     pointer-events: auto; /* Réactive les interactions */
 }
 
+/* --- Barre de filtres WORK ---
+   Ancrée à la grille (au-dessus de la première image affichée) : elle suit donc l'image
+   lors du défilement et du changement de filtre, sans décaler la grille. */
+.gallery-masonry {
+    position: relative;
+}
+
+.gallery-filters {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 14px;
+    white-space: nowrap;
+}
+
+/* Même typographie que les boutons PREV / NEXT / header ; actif en noir, les autres en gris */
+.gallery-filter {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    font-family: 'europagroshop-dembol', serif;
+    font-size: calc(var(--text-size) * 1.1);
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #999999;
+    transition: color 0.3s ease;
+}
+
+.gallery-filter:hover,
+.gallery-filter.is-active {
+    color: #000000;
+}
+
+.gallery-masonry img.is-filtered-out {
+    display: none;
+}
+
+@media (max-width: 1024px) {
+    /* Mobile/tablette : la barre occupe toute la largeur du conteneur */
+    .gallery-filters {
+        right: 0;
+        justify-content: space-between;
+        gap: 0;
+    }
+}
+
 /* Sur la page WORK, le footer doit être un vrai footer de fin de page
    (dans le flux, après les images), pas fixé à l'écran comme ailleurs */
 .gallery-section .site-footer {

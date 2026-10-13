@@ -87,21 +87,28 @@
 
         <section class="gallery-section">
             <div class="gallery-masonry">
+                <!-- Barre de filtres : liée à la grille, elle reste au-dessus de la première image affichée -->
+                <div class="gallery-filters" role="group" aria-label="Filtrer les projets">
+                    <button type="button" class="gallery-filter is-active" data-filter="all" aria-pressed="true">ALL</button>
+                    <button type="button" class="gallery-filter" data-filter="photo" aria-pressed="false">PHOTO</button>
+                    <button type="button" class="gallery-filter" data-filter="video" aria-pressed="false">VIDEO</button>
+                    <button type="button" class="gallery-filter" data-filter="art-direction" aria-pressed="false">ART DIRECTION</button>
+                </div>
                 <!-- Une image par projet : le clic ouvre le projet correspondant dans la SPA (index.html) -->
-                <img src="projets/gallery/work/visuel_02.webp" alt="Tha" data-project="tha">
-                <img src="projets/gallery/work/adsb01.webp" alt="Andersson Bell" data-project="andersson_bell">
-                <img src="projets/gallery/work/visuel_10.webp" alt="Créolisation" data-project="creolisation">
-                <img src="projets/gallery/work/ultuure.webp" alt="The Culture Evolves" data-project="the_culture_evolves">
-                <img src="projets/gallery/work/street04.webp" alt="Osaka" data-project="osaka">
-                <img src="projets/gallery/work/keblack_post_0-07.webp" alt="Keblack" data-project="keblack">
-                <img src="projets/gallery/work/memoire_post_05.webp" alt="Mémoire" data-project="memoire">
-                <img src="projets/gallery/work/madamemo_poster.webp" alt="MadameMo" data-project="madamemo">
-                <img src="projets/gallery/work/05.webp" alt="Posters" data-project="posters">
-                <img src="projets/gallery/work/visuel_07.webp" alt="Sinequanon" data-project="sinequanon">
-                <img src="projets/gallery/work/visuel_06.webp" alt="Sunburn" data-project="sunburn">
-                <img src="projets/gallery/work/cop1_05.webp" alt="COP1" data-project="cop1">
-                <img src="projets/gallery/work/dici_images-05.webp" alt="Agence Dici" data-project="agence_dici">
-                <img src="projets/gallery/work/jardin_7.webp" alt="Jardin des exilées" data-project="jardin_des_exilees">
+                <img src="projets/gallery/work/visuel_02.webp" alt="Tha" data-project="tha" data-category="art-direction">
+                <img src="projets/gallery/work/adsb01.webp" alt="Andersson Bell" data-project="andersson_bell" data-category="art-direction">
+                <img src="projets/gallery/work/visuel_10.webp" alt="Créolisation" data-project="creolisation" data-category="art-direction">
+                <img src="projets/gallery/work/ultuure.webp" alt="The Culture Evolves" data-project="the_culture_evolves" data-category="video">
+                <img src="projets/gallery/work/street04.webp" alt="Osaka" data-project="osaka" data-category="photo">
+                <img src="projets/gallery/work/keblack_post_0-07.webp" alt="Keblack" data-project="keblack" data-category="art-direction">
+                <img src="projets/gallery/work/memoire_post_05.webp" alt="Mémoire" data-project="memoire" data-category="art-direction">
+                <img src="projets/gallery/work/madamemo_poster.webp" alt="MadameMo" data-project="madamemo" data-category="video">
+                <img src="projets/gallery/work/05.webp" alt="Posters" data-project="posters" data-category="art-direction">
+                <img src="projets/gallery/work/visuel_07.webp" alt="Sinequanon" data-project="sinequanon" data-category="art-direction">
+                <img src="projets/gallery/work/visuel_06.webp" alt="Sunburn" data-project="sunburn" data-category="video">
+                <img src="projets/gallery/work/cop1_05.webp" alt="COP1" data-project="cop1" data-category="video">
+                <img src="projets/gallery/work/dici_images-05.webp" alt="Agence Dici" data-project="agence_dici" data-category="art-direction">
+                <img src="projets/gallery/work/jardin_7.webp" alt="Jardin des exilées" data-project="jardin_des_exilees" data-category="photo">
             </div>
             <footer class="site-footer">Copyright © 2026 Atelier MDD</footer>
         </section>
@@ -124,6 +131,22 @@
         document.addEventListener('DOMContentLoaded', () => {
             const workImages = document.querySelectorAll('.gallery-masonry img');
             const fade = document.getElementById('page-fade');
+
+            // Filtres (ALL / PHOTO / VIDEO / ART DIRECTION) : masque les projets hors catégorie, sans rechargement
+            const filterButtons = document.querySelectorAll('.gallery-filter');
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const filter = btn.dataset.filter;
+                    filterButtons.forEach(b => {
+                        const active = b === btn;
+                        b.classList.toggle('is-active', active);
+                        b.setAttribute('aria-pressed', active ? 'true' : 'false');
+                    });
+                    workImages.forEach(img => {
+                        img.classList.toggle('is-filtered-out', filter !== 'all' && img.dataset.category !== filter);
+                    });
+                });
+            });
 
             // Clic sur une image WORK : fondu blanc puis ouverture du projet dans la SPA (index.html)
             workImages.forEach(img => {
